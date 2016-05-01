@@ -19,12 +19,15 @@ import com.aiss.omnidrive.shared.UrlUtils;
 
 public class OAuthResource {
 	
-	private static final String BASE_URL = "";
-	private static final String CLIENT_ID = "251525019809-bttumkqg26s43j01qmcqogrtesvv4cie.apps.googleusercontent.com";
-	private static final String CLIENT_SECRET = "Be6LpCB1RshhLyg7wXd8-p4A";
-
+	private static final String DRIVE_CLIENT_ID = "251525019809-bttumkqg26s43j01qmcqogrtesvv4cie.apps.googleusercontent.com";
+	private static final String DRIVE_CLIENT_SECRET = "Be6LpCB1RshhLyg7wXd8-p4A";
+	private static final String ONEDRIVE_CLIENT_ID = "";
+	private static final String ONEDRIVE_CLIENT_SECRET = "";
+	private static final String DROPBOX_CLIENT_ID = "";
+	private static final String DROPBOX_CLIENT_SECRET = "";
 	
-	public static String getAuthUrl(){
+	
+	public static String getDriveAuthUrl(){
 		String authUrl; 
 		Map<String, String> urlParams;
 		
@@ -32,7 +35,50 @@ public class OAuthResource {
 		urlParams = new HashMap<String, String>();
 		
 		urlParams.put("response_type", "code");
-		urlParams.put("client_id", OAuthResource.CLIENT_ID);
+		urlParams.put("client_id", OAuthResource.DRIVE_CLIENT_ID);
+		urlParams.put("redirect_uri", "http://127.0.0.1:8888/");
+		urlParams.put("scope", "https://www.googleapis.com/auth/drive");
+		urlParams.put("state", "driveAuth");
+		urlParams.put("access_type", "offline");
+		urlParams.put("prompt", "select_account");
+		urlParams.put("include_granted_scopes", "true");
+		
+		authUrl += UrlUtils.parseParams(urlParams);
+		
+		return authUrl;
+	}
+	
+
+	public static String getOnedriveAuthUrl(){
+		String authUrl; 
+		Map<String, String> urlParams;
+		
+		authUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+		urlParams = new HashMap<String, String>();
+		
+		urlParams.put("response_type", "code");
+		urlParams.put("client_id", OAuthResource.ONEDRIVE_CLIENT_ID);
+		urlParams.put("redirect_uri", "http://127.0.0.1:8888/");
+		urlParams.put("scope", "https://www.googleapis.com/auth/drive");
+		urlParams.put("access_type", "offline");
+		urlParams.put("prompt", "select_account");
+		urlParams.put("include_granted_scopes", "true");
+		
+		authUrl += UrlUtils.parseParams(urlParams);
+		
+		return authUrl;
+	}
+	
+
+	public static String getDropboxAuthUrl(){
+		String authUrl; 
+		Map<String, String> urlParams;
+		
+		authUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+		urlParams = new HashMap<String, String>();
+		
+		urlParams.put("response_type", "code");
+		urlParams.put("client_id", OAuthResource.DRIVE_CLIENT_ID);
 		urlParams.put("redirect_uri", "http://127.0.0.1:8888/");
 		urlParams.put("scope", "https://www.googleapis.com/auth/drive");
 		urlParams.put("state", "driveAuth");
@@ -47,13 +93,50 @@ public class OAuthResource {
 	
 	public static OAuthToken getDriveToken(String code){
 		OAuthToken token;
+		String authUrl, clientId, clientSecret, grantType, redirectUri;
 		
-		token = OAuthResource.getToken("", "", "", "", code);
+		authUrl = "https://www.googleapis.com/oauth2/v4/token";
+		clientId = OAuthResource.DRIVE_CLIENT_ID;
+		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
+		grantType = "authorization_code";
+		redirectUri = "http://127.0.0.1:8888/";
+		
+		token = OAuthResource.getToken(authUrl, clientId, clientSecret, grantType, redirectUri, code);
 	
 		return token;
 	}
 	
-	public static OAuthToken getToken(String clientId, String clientSecret, String redirectUri, String grantType, String code){
+	public static OAuthToken getOnedriveToken(String code){
+		OAuthToken token;
+		String authUrl, clientId, clientSecret, grantType, redirectUri;
+		
+		authUrl = "https://www.googleapis.com/oauth2/v4/token";
+		clientId = OAuthResource.DRIVE_CLIENT_ID;
+		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
+		grantType = "authorization_code";
+		redirectUri = "http://127.0.0.1:8888/";
+		
+		token = OAuthResource.getToken(authUrl, clientId, clientSecret, grantType, redirectUri, code);
+	
+		return token;
+	}
+	
+	public static OAuthToken getDropboxToken(String code){
+		OAuthToken token;
+		String authUrl, clientId, clientSecret, grantType, redirectUri;
+		
+		authUrl = "https://www.googleapis.com/oauth2/v4/token";
+		clientId = OAuthResource.DRIVE_CLIENT_ID;
+		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
+		grantType = "authorization_code";
+		redirectUri = "http://127.0.0.1:8888/";
+		
+		token = OAuthResource.getToken(authUrl, clientId, clientSecret, grantType, redirectUri, code);
+	
+		return token;
+	}
+	
+	public static OAuthToken getToken(String authUrl, String clientId, String clientSecret, String grantType, String redirectUri, String code){
 		OAuthToken token;
 		ClientResource connection;
 		Form requestBody;
@@ -63,17 +146,17 @@ public class OAuthResource {
 		
 		requestBody = new Form();
 		requestBody.add("code", code);
-		requestBody.add("client_id", OAuthResource.CLIENT_ID);
-		requestBody.add("client_secret", OAuthResource.CLIENT_SECRET);
-		requestBody.add("redirect_uri", "http://127.0.0.1:8888/");
-		requestBody.add("grant_type", "authorization_code");
+		requestBody.add("client_id", clientId);
+		requestBody.add("client_secret", clientSecret);
+		requestBody.add("redirect_uri", redirectUri);
+		requestBody.add("grant_type", grantType);
 		
-		connection = new ClientResource("https://www.googleapis.com/oauth2/v4/token");
+		connection = new ClientResource(authUrl);
 		
 		connection.setMethod(Method.POST);
 		connection.accept(MediaType.APPLICATION_JSON);
 		connection.setProtocol(Protocol.HTTPS);
-		connection.setHostRef("www.googleapis.com");
+		//connection.setHostRef("www.googleapis.com");
 		cacheDirectives.add(CacheDirective.noCache());
 		connection.getResponse().setCacheDirectives(cacheDirectives);
 		

@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.Panel;
 
 public class DriveMenuView extends Composite {
 	
-	private final OAuthServiceAsync driveService = GWT.create(OAuthService.class);
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
 	
 	public DriveMenuView(){
 		new DriveMenuView(new HashMap<String, String>());
@@ -38,7 +38,7 @@ public class DriveMenuView extends Composite {
 		if (!History.getToken().isEmpty()) {
 			if (History.getToken().equals("driveConnect")) {
 				String code = Window.Location.getParameterMap().get("authCode").get(0);
-				driveService.getToken("drive", code, new AsyncCallback<OAuthToken>() {
+				oauthService.getToken("drive", code, new AsyncCallback<OAuthToken>() {
 
 					@Override
 					public void onSuccess(OAuthToken token) {
@@ -48,6 +48,8 @@ public class DriveMenuView extends Composite {
 							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
 							Cookies.setCookie("driveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
 							Window.Location.replace(GWT.getHostPageBaseURL());
+						} else {
+							driveMenu.add(new HTML(token.getError()));
 						}
 					}
 					
@@ -72,7 +74,7 @@ public class DriveMenuView extends Composite {
 					@Override
 					public void onClick(ClickEvent event) {
 						// TODO Auto-generated method stub
-						driveService.getAuthUrl(new AsyncCallback<String>() {
+						oauthService.getAuthUrl(new AsyncCallback<String>() {
 							
 							@Override
 							public void onSuccess(String authUrl) {

@@ -9,7 +9,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class OAuthServiceImpl extends RemoteServiceServlet implements OAuthService {
 
 	public String getAuthUrl(){
-		return OAuthResource.getAuthUrl();
+		return OAuthResource.getDriveAuthUrl();
 	}
 	
 	public OAuthToken getToken(String service,String code){
@@ -17,11 +17,11 @@ public class OAuthServiceImpl extends RemoteServiceServlet implements OAuthServi
 		
 		token = null;
 		
-		if (service == "drive"){
+		if (service.equals("drive")){
 			token = OAuthResource.getDriveToken(code);
-		} else if (service == "onedrive") {
+		} else if (service.equals("onedrive")) {
 			
-		} else if (service == "dropbox") {
+		} else if (service.equals("dropbox")) {
 			
 		}
 		
