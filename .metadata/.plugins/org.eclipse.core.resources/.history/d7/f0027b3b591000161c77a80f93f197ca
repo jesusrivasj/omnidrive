@@ -1,0 +1,91 @@
+
+package com.aiss.omnidrive.shared.dropbox.user;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@Generated("org.jsonschema2pojo")
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class DropboxQuotaInfo implements Serializable {
+
+    private String shared;
+    private String quota;
+    private String normal;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The shared
+     */
+    public Long getShared() {
+        return shared;
+    }
+
+    /**
+     * 
+     * @param shared
+     *     The shared
+     */
+    public void setShared(Long shared) {
+        this.shared = shared;
+    }
+
+    /**
+     * 
+     * @return
+     *     The quota
+     */
+    public Long getQuota() {
+        return quota;
+    }
+
+    /**
+     * 
+     * @param quota
+     *     The quota
+     */
+    public void setQuota(Long quota) {
+        this.quota = quota;
+    }
+
+    /**
+     * 
+     * @return
+     *     The normal
+     */
+    public Long getNormal() {
+        return normal;
+    }
+
+    /**
+     * 
+     * @param normal
+     *     The normal
+     */
+    public void setNormal(Long normal) {
+        this.normal = normal;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+    public Double getQuotaInGB(){
+    	Double quota, quotaGB;
+    	
+    	quota = new Double(this.getQuota());
+    	quotaGB = (quota / 1024 / 1024 / 1024) * 100.0;
+    	
+    	return Math.round(quotaGB) / 100.0;
+    }
+}

@@ -1,0 +1,27 @@
+package com.aiss.omnidrive.client.views.drive;
+
+import com.aiss.omnidrive.client.rpc.DriveService;
+import com.aiss.omnidrive.client.rpc.DriveServiceAsync;
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ContextMenuEvent;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.PopupPanel;
+
+public class DriveFileContextualMenuView extends Composite {
+
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final DriveServiceAsync driveService = GWT.create(DriveService.class);
+	
+	
+	public DriveFileContextualMenuView(ContextMenuEvent event){
+		PopupPanel menuContextual = new PopupPanel(true);
+		menuContextual.addStyleName("menuContextual");
+		menuContextual.add(new HTML("Opcion 1"));
+		menuContextual.setPopupPosition(event.getNativeEvent().getClientX(), event.getNativeEvent().getClientY());
+		menuContextual.show();
+	}
+	
+}

@@ -1,2 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.google.appengine.api.images.Composite.Anchor"/>
+<fullyQualifiedTypeName name="com.gargoylesoftware.htmlunit.History"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Anchor"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.History"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.server.rpc.RemoteServiceServlet"/>
+<fullyQualifiedTypeName name="com.aiss.omnidrive.client.rpc.DriveService"/>
+<fullyQualifiedTypeName name="com.google.gwt.core.client.Callback"/>
+<fullyQualifiedTypeName name="org.restlet.data.Conditions"/>
+<fullyQualifiedTypeName name="org.restlet.data.AuthenticationInfo"/>
+<fullyQualifiedTypeName name="org.restlet.data.ChallengeScheme"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonTypeInfo"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonTypeInfo.Id"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonRawValue"/>
+<fullyQualifiedTypeName name="com.google.appengine.repackaged.org.codehaus.jackson.map.annotate.JsonTypeResolver"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonProperty"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.map.annotate.JsonSerialize"/>
+<fullyQualifiedTypeName name="com.google.appengine.repackaged.org.codehaus.jackson.map.DeserializationConfig"/>
+<fullyQualifiedTypeName name="com.google.appengine.repackaged.org.codehaus.jackson.map.DeserializationConfig.Feature"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.map.DeserializationContext"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.map.DeserializationConfig"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.map.DeserializationConfig.Feature"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.map.annotate.JsonDeserialize"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.annotate.JsonIgnoreProperties"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="com.aiss.omnidrive.client.controllers.DriveController"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Window.Location"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Cookies"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.rpc.AsyncCallback"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Panel"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HTML"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.dom.client.DoubleClickHandler"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.dom.client.ClickHandler"/>
+<fullyQualifiedTypeName name="org.apache.xpath.patterns.ContextMatchStepPattern"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.dom.client.ContextMenuHandler"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Event"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.dom.client.DomEvent.Type"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.shared.EventHandler"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.shared.GwtEvent"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.shared.GwtEvent.Type"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Composite"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Window"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Image"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="com.aiss.omnidrive.client.controllers.MainController"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+</qualifiedTypeNameHistroy>

@@ -110,7 +110,6 @@ a.navbar-brand:hover {
 
 .sidenavMenuContent {
 	font-size: 16px;
-	padding: 10px 0 10px 10px;
 	border-top: 2px solid #000000;
 	background: #d8d8d8;
 	overflow-y: scroll;
@@ -135,6 +134,86 @@ a.navbar-brand:hover {
 
 .bgGrey {
 	background: #999999;	
+}
+
+.menuOption {
+	padding: 10px 0 10px 10px;
+	cursor: pointer;
+}
+
+.menuOption:hover {
+	background: #525050;
+	color: #ffffff;
+}
+
+.menuOptionDown {
+	position:absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: right;
+	padding: 10px 10px 5px 10px;
+} 
+
+.fileView {
+	background: #ffffff;
+	width: 20%;
+	height: 120px;
+	margin: 15px 15px;
+	padding: 0; 
+	display: inline-block;
+	box-shadow: 5px 5px 10px #555555;
+}
+
+.fileContent {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.menuContextual {
+	width: 150px;
+	min-height: 200px;
+	background: #494545;
+	color: #ffffff;
+	font-size: 14px;
+}
+
+.textContent {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 5px;
+}
+
+.iconContent {
+	width: 100%;
+	padding: 5px;
+}
+
+.icon {
+	width: 15%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.infobar {
+	position: fixed;
+	top: 6rem;
+	left: 30rem;
+	right: 18px;
+	height: 48px;
+	background: #636161;
+	border-bottom: 2px solid #000000;
+	z-index: 10;
+}
+
+.paddingContent {
+	padding-top: 58px;
 }
 
 /** Example rules used by the template application (remove for your app) */

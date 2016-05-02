@@ -1,0 +1,14 @@
+package com.aiss.omnidrive.server.resources;
+
+import com.aiss.omnidrive.shared.drive.DriveUserInfo;
+
+public class DriveResource {
+	
+	private static final String BASE_URL = "https://www.googleapis.com/drive/v3";
+	private static final String TYPE_TOKEN = "Bearer";
+	
+	public static DriveUserInfo getUserInfo(String token){
+		DriveUserInfo userInfo;
+		ClientResource connection;
+	}
+}

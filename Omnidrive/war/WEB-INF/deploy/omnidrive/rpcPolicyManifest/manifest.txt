@@ -1,0 +1,5 @@
+# Module omnidrive
+# RPC service class, partial path of RPC policy file
+com.aiss.omnidrive.client.rpc.OAuthService, EAF916B6A682D536C5BB78093546C726.gwt.rpc
+com.aiss.omnidrive.client.rpc.DriveService, 4BE521B3F1B4292F6422901FCAE69B24.gwt.rpc
+com.aiss.omnidrive.client.rpc.DropboxService, 8C2CEF8F672CDB1B8F370934273D041B.gwt.rpc

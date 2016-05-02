@@ -1,0 +1,17 @@
+package com.aiss.omnidrive.server;
+
+import com.aiss.omnidrive.client.rpc.DropboxService;
+import com.aiss.omnidrive.server.resources.DriveResource;
+import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+public class DropboxServiceImpl extends RemoteServiceServlet implements DropboxService{
+	
+	public DropboxUserInfo getUserInfo(String token){
+		DriveUserInfo userInfo;
+		
+		userInfo = DriveResource.getUserInfo(token);
+		
+		return userInfo;
+	}
+}

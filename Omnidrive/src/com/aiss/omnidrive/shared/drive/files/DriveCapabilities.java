@@ -1,0 +1,153 @@
+
+package com.aiss.omnidrive.shared.drive.files;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "canEdit",
+    "canComment",
+    "canShare",
+    "canCopy",
+    "canReadRevisions"
+})
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class DriveCapabilities implements Serializable {
+
+    @JsonProperty("canEdit")
+    private Boolean canEdit;
+    @JsonProperty("canComment")
+    private Boolean canComment;
+    @JsonProperty("canShare")
+    private Boolean canShare;
+    @JsonProperty("canCopy")
+    private Boolean canCopy;
+    @JsonProperty("canReadRevisions")
+    private Boolean canReadRevisions;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The canEdit
+     */
+    @JsonProperty("canEdit")
+    public Boolean getCanEdit() {
+        return canEdit;
+    }
+
+    /**
+     * 
+     * @param canEdit
+     *     The canEdit
+     */
+    @JsonProperty("canEdit")
+    public void setCanEdit(Boolean canEdit) {
+        this.canEdit = canEdit;
+    }
+
+    /**
+     * 
+     * @return
+     *     The canComment
+     */
+    @JsonProperty("canComment")
+    public Boolean getCanComment() {
+        return canComment;
+    }
+
+    /**
+     * 
+     * @param canComment
+     *     The canComment
+     */
+    @JsonProperty("canComment")
+    public void setCanComment(Boolean canComment) {
+        this.canComment = canComment;
+    }
+
+    /**
+     * 
+     * @return
+     *     The canShare
+     */
+    @JsonProperty("canShare")
+    public Boolean getCanShare() {
+        return canShare;
+    }
+
+    /**
+     * 
+     * @param canShare
+     *     The canShare
+     */
+    @JsonProperty("canShare")
+    public void setCanShare(Boolean canShare) {
+        this.canShare = canShare;
+    }
+
+    /**
+     * 
+     * @return
+     *     The canCopy
+     */
+    @JsonProperty("canCopy")
+    public Boolean getCanCopy() {
+        return canCopy;
+    }
+
+    /**
+     * 
+     * @param canCopy
+     *     The canCopy
+     */
+    @JsonProperty("canCopy")
+    public void setCanCopy(Boolean canCopy) {
+        this.canCopy = canCopy;
+    }
+
+    /**
+     * 
+     * @return
+     *     The canReadRevisions
+     */
+    @JsonProperty("canReadRevisions")
+    public Boolean getCanReadRevisions() {
+        return canReadRevisions;
+    }
+
+    /**
+     * 
+     * @param canReadRevisions
+     *     The canReadRevisions
+     */
+    @JsonProperty("canReadRevisions")
+    public void setCanReadRevisions(Boolean canReadRevisions) {
+        this.canReadRevisions = canReadRevisions;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

@@ -1,0 +1,291 @@
+
+package com.aiss.omnidrive.shared.dropbox.user;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "uid",
+    "display_name",
+    "name_details",
+    "referral_link",
+    "country",
+    "locale",
+    "email",
+    "email_verified",
+    "is_paired",
+    "team",
+    "quota_info"
+})
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class DropboxUserInfo implements Serializable {
+
+    @JsonProperty("uid")
+    private Long uid;
+    @JsonProperty("display_name")
+    private String displayName;
+    @JsonProperty("name_details")
+    private DropboxNameDetails nameDetails;
+    @JsonProperty("referral_link")
+    private String referralLink;
+    @JsonProperty("country")
+    private String country;
+    @JsonProperty("locale")
+    private String locale;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("email_verified")
+    private Boolean emailVerified;
+    @JsonProperty("is_paired")
+    private Boolean isPaired;
+    @JsonProperty("team")
+    private DropboxTeam team;
+    @JsonProperty("quota_info")
+    private DropboxQuotaInfo_old quotaInfo;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The uid
+     */
+    @JsonProperty("uid")
+    public Long getUid() {
+        return uid;
+    }
+
+    /**
+     * 
+     * @param uid
+     *     The uid
+     */
+    @JsonProperty("uid")
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    /**
+     * 
+     * @return
+     *     The displayName
+     */
+    @JsonProperty("display_name")
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    /**
+     * 
+     * @param displayName
+     *     The display_name
+     */
+    @JsonProperty("display_name")
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    /**
+     * 
+     * @return
+     *     The nameDetails
+     */
+    @JsonProperty("name_details")
+    public DropboxNameDetails getNameDetails() {
+        return nameDetails;
+    }
+
+    /**
+     * 
+     * @param nameDetails
+     *     The name_details
+     */
+    @JsonProperty("name_details")
+    public void setNameDetails(DropboxNameDetails nameDetails) {
+        this.nameDetails = nameDetails;
+    }
+
+    /**
+     * 
+     * @return
+     *     The referralLink
+     */
+    @JsonProperty("referral_link")
+    public String getReferralLink() {
+        return referralLink;
+    }
+
+    /**
+     * 
+     * @param referralLink
+     *     The referral_link
+     */
+    @JsonProperty("referral_link")
+    public void setReferralLink(String referralLink) {
+        this.referralLink = referralLink;
+    }
+
+    /**
+     * 
+     * @return
+     *     The country
+     */
+    @JsonProperty("country")
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * 
+     * @param country
+     *     The country
+     */
+    @JsonProperty("country")
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    /**
+     * 
+     * @return
+     *     The locale
+     */
+    @JsonProperty("locale")
+    public String getLocale() {
+        return locale;
+    }
+
+    /**
+     * 
+     * @param locale
+     *     The locale
+     */
+    @JsonProperty("locale")
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * 
+     * @return
+     *     The email
+     */
+    @JsonProperty("email")
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * 
+     * @param email
+     *     The email
+     */
+    @JsonProperty("email")
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * 
+     * @return
+     *     The emailVerified
+     */
+    @JsonProperty("email_verified")
+    public Boolean getEmailVerified() {
+        return emailVerified;
+    }
+
+    /**
+     * 
+     * @param emailVerified
+     *     The email_verified
+     */
+    @JsonProperty("email_verified")
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    /**
+     * 
+     * @return
+     *     The isPaired
+     */
+    @JsonProperty("is_paired")
+    public Boolean getIsPaired() {
+        return isPaired;
+    }
+
+    /**
+     * 
+     * @param isPaired
+     *     The is_paired
+     */
+    @JsonProperty("is_paired")
+    public void setIsPaired(Boolean isPaired) {
+        this.isPaired = isPaired;
+    }
+
+    /**
+     * 
+     * @return
+     *     The team
+     */
+    @JsonProperty("team")
+    public DropboxTeam getTeam() {
+        return team;
+    }
+
+    /**
+     * 
+     * @param team
+     *     The team
+     */
+    @JsonProperty("team")
+    public void setTeam(DropboxTeam team) {
+        this.team = team;
+    }
+
+    /**
+     * 
+     * @return
+     *     The quotaInfo
+     */
+    @JsonProperty("quota_info")
+    public DropboxQuotaInfo_old getQuotaInfo() {
+        return quotaInfo;
+    }
+
+    /**
+     * 
+     * @param quotaInfo
+     *     The quota_info
+     */
+    @JsonProperty("quota_info")
+    public void setQuotaInfo(DropboxQuotaInfo_old quotaInfo) {
+        this.quotaInfo = quotaInfo;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

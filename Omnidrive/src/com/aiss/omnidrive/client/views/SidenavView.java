@@ -3,6 +3,7 @@ package com.aiss.omnidrive.client.views;
 import java.util.Map;
 
 import com.aiss.omnidrive.client.views.drive.DriveMenuView;
+import com.aiss.omnidrive.client.views.dropbox.DropboxMenuView;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -31,10 +32,12 @@ public class SidenavView extends Composite {
 		sidenavMenu.addStyleName("sidenavMenu");
 		
 		driveHeader = createHeader("Google Drive");
+		dropboxHeader = createHeader("Dropbox");
 		disconnectHeader = createHeader("Desconectar");
 		disconnectHeader.addStyleName("disconnectHeader");
 		
 		sidenavMenu.add(new DriveMenuView(params), driveHeader, 3.0);
+		sidenavMenu.add(new DropboxMenuView(params), dropboxHeader, 3.0);
 		sidenavMenu.add(new SimplePanel(), disconnectHeader, 3.0);
 		
 		sidenav.add(sidenavMenu);

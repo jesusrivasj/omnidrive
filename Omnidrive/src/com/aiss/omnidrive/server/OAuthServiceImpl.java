@@ -8,8 +8,20 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class OAuthServiceImpl extends RemoteServiceServlet implements OAuthService {
 
-	public String getAuthUrl(){
-		return OAuthResource.getDriveAuthUrl();
+	public String getAuthUrl(String service){
+		String authUrl;
+		
+		authUrl = "";
+		
+		if (service.equals("drive")) {
+			authUrl = OAuthResource.getDriveAuthUrl();
+		} else if (service.equals("onedrive")) {
+			authUrl = OAuthResource.getOnedriveAuthUrl();
+		} else if (service.equals("dropbox")) {
+			authUrl = OAuthResource.getDropboxAuthUrl();
+		}
+		
+		return authUrl;
 	}
 	
 	public OAuthToken getToken(String service,String code){
@@ -22,6 +34,20 @@ public class OAuthServiceImpl extends RemoteServiceServlet implements OAuthServi
 		} else if (service.equals("onedrive")) {
 			
 		} else if (service.equals("dropbox")) {
+			token = OAuthResource.getDropboxToken(code);
+		}
+		
+		return token;
+	}
+	
+	public OAuthToken refreshToken(String service,String refreshToken){
+		OAuthToken token;
+		
+		token = null;
+		
+		if (service.equals("drive")){
+			token = OAuthResource.refreshDriveToken(refreshToken);
+		} else if (service.equals("onedrive")) {
 			
 		}
 		

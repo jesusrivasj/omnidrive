@@ -13,6 +13,8 @@ public class MainController {
 				
 		if (action == "index") {
 			IndexController.show(params);
+		} else if (action.equals("drive")) {
+			DriveController.show(params);
 		}
 	}
 

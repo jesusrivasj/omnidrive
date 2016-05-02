@@ -1,0 +1,23 @@
+1462179826626	Rename type 'DropboxQuotaInfo'
+1462179840501	Rename type 'DropboxQuotaInfo_old'
+1462179912957	Rename type 'NameDetails'
+1462179922283	Rename type 'QuotaInfo'
+1462179930288	Rename type 'Team'
+1462181733530	Rename type 'NameDetails'
+1462181744064	Rename type 'QuotaInfo'
+1462181752599	Rename type 'Team'
+1462182759495	Delete element
+1462182761252	Delete element
+1462182762949	Delete element
+1462184301297	Rename type 'NameDetails'
+1462184377281	Rename type 'QuotaInfo'
+1462184385122	Rename type 'Team'
+1462206897596	Rename type 'Permission'
+1462206914287	Rename type 'Capabilities'
+1462206941346	Rename type 'File'
+1462206976070	Rename type 'ImageMediaMetadata'
+1462206987939	Rename type 'LastModifyingUser'
+1462207001476	Rename type 'Owner'
+1462207722563	Rename type 'DriveFilesCollection'
+1462208042166	Rename type 'DriveFiles'
+1462215122258	Rename type 'DriveFileMenuContextView'

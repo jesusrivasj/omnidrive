@@ -1,0 +1,8 @@
+package com.aiss.omnidrive.client.rpc;
+
+import com.aiss.omnidrive.shared.drive.DriveUserInfo;
+
+public interface DriveService extends RemoteService {
+	
+	DriveUserInfo getUserInfo(String token);
+}

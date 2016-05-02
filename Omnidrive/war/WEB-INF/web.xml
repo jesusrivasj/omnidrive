@@ -17,6 +17,26 @@
     <url-pattern>/omnidrive/oauth</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>driveServlet</servlet-name>
+    <servlet-class>com.aiss.omnidrive.server.DriveServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>driveServlet</servlet-name>
+    <url-pattern>/omnidrive/drive</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>dropboxServlet</servlet-name>
+    <servlet-class>com.aiss.omnidrive.server.DropboxServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>dropboxServlet</servlet-name>
+    <url-pattern>/omnidrive/dropbox</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Omnidrive.html</welcome-file>

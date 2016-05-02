@@ -1,0 +1,10 @@
+package com.aiss.omnidrive.server;
+
+import com.aiss.omnidrive.client.rpc.DriveService;
+import com.aiss.omnidrive.shared.drive.DriveUserInfo;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+public class DriveServiceImpl extends RemoteServiceServlet implements DriveService{
+
+	public DriveUserInfo getUserInfo(String token)
+}

@@ -1,0 +1,43 @@
+package com.aiss.omnidrive.server;
+
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.server.resources.OAuthResource;
+import com.aiss.omnidrive.shared.OAuthToken;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+@SuppressWarnings("serial")
+public class OAuthServiceImpl extends RemoteServiceServlet implements OAuthService {
+
+	public String getAuthUrl(String service){
+		String authUrl;
+		
+		authUrl = "";
+		
+		if (service.equals("drive")) {
+			authUrl = OAuthResource.getDriveAuthUrl();
+		} else if (service.equals("onedrive")) {
+			authUrl = OAuthResource.getOnedriveAuthUrl();
+		} else if (service.equals("dropbox")) {
+			authUrl = OAuthResource.getDropboxAuthUrl();
+		}
+		
+		return authUrl;
+	}
+	
+	public OAuthToken getToken(String service,String code){
+		OAuthToken token;
+		
+		token = null;
+		
+		if (service.equals("drive")){
+			token = OAuthResource.getDriveToken(code);
+		} else if (service.equals("onedrive")) {
+			
+		} else if (service.equals("dropbox")) {
+			token = OAuthResource.getDropboxToken(code);
+		}
+		
+		return token;
+	}
+	
+}

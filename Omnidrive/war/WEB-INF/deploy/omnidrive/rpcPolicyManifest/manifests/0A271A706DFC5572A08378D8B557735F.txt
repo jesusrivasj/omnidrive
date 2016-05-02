@@ -1,0 +1,2 @@
+serviceClass: com.aiss.omnidrive.client.rpc.OAuthService
+path: EAF916B6A682D536C5BB78093546C726.gwt.rpc

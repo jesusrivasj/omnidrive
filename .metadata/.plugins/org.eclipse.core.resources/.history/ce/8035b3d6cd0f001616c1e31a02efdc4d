@@ -1,0 +1,125 @@
+
+package com.aiss.omnidrive.shared.drive;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Generated;
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "application/vnd.google-apps.document",
+    "application/vnd.google-apps.spreadsheet",
+    "application/vnd.google-apps.presentation",
+    "application/vnd.google-apps.drawing"
+})
+public class MaxImportSizes {
+
+    @JsonProperty("application/vnd.google-apps.document")
+    private String applicationVndGoogleAppsDocument;
+    @JsonProperty("application/vnd.google-apps.spreadsheet")
+    private String applicationVndGoogleAppsSpreadsheet;
+    @JsonProperty("application/vnd.google-apps.presentation")
+    private String applicationVndGoogleAppsPresentation;
+    @JsonProperty("application/vnd.google-apps.drawing")
+    private String applicationVndGoogleAppsDrawing;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The applicationVndGoogleAppsDocument
+     */
+    @JsonProperty("application/vnd.google-apps.document")
+    public String getApplicationVndGoogleAppsDocument() {
+        return applicationVndGoogleAppsDocument;
+    }
+
+    /**
+     * 
+     * @param applicationVndGoogleAppsDocument
+     *     The application/vnd.google-apps.document
+     */
+    @JsonProperty("application/vnd.google-apps.document")
+    public void setApplicationVndGoogleAppsDocument(String applicationVndGoogleAppsDocument) {
+        this.applicationVndGoogleAppsDocument = applicationVndGoogleAppsDocument;
+    }
+
+    /**
+     * 
+     * @return
+     *     The applicationVndGoogleAppsSpreadsheet
+     */
+    @JsonProperty("application/vnd.google-apps.spreadsheet")
+    public String getApplicationVndGoogleAppsSpreadsheet() {
+        return applicationVndGoogleAppsSpreadsheet;
+    }
+
+    /**
+     * 
+     * @param applicationVndGoogleAppsSpreadsheet
+     *     The application/vnd.google-apps.spreadsheet
+     */
+    @JsonProperty("application/vnd.google-apps.spreadsheet")
+    public void setApplicationVndGoogleAppsSpreadsheet(String applicationVndGoogleAppsSpreadsheet) {
+        this.applicationVndGoogleAppsSpreadsheet = applicationVndGoogleAppsSpreadsheet;
+    }
+
+    /**
+     * 
+     * @return
+     *     The applicationVndGoogleAppsPresentation
+     */
+    @JsonProperty("application/vnd.google-apps.presentation")
+    public String getApplicationVndGoogleAppsPresentation() {
+        return applicationVndGoogleAppsPresentation;
+    }
+
+    /**
+     * 
+     * @param applicationVndGoogleAppsPresentation
+     *     The application/vnd.google-apps.presentation
+     */
+    @JsonProperty("application/vnd.google-apps.presentation")
+    public void setApplicationVndGoogleAppsPresentation(String applicationVndGoogleAppsPresentation) {
+        this.applicationVndGoogleAppsPresentation = applicationVndGoogleAppsPresentation;
+    }
+
+    /**
+     * 
+     * @return
+     *     The applicationVndGoogleAppsDrawing
+     */
+    @JsonProperty("application/vnd.google-apps.drawing")
+    public String getApplicationVndGoogleAppsDrawing() {
+        return applicationVndGoogleAppsDrawing;
+    }
+
+    /**
+     * 
+     * @param applicationVndGoogleAppsDrawing
+     *     The application/vnd.google-apps.drawing
+     */
+    @JsonProperty("application/vnd.google-apps.drawing")
+    public void setApplicationVndGoogleAppsDrawing(String applicationVndGoogleAppsDrawing) {
+        this.applicationVndGoogleAppsDrawing = applicationVndGoogleAppsDrawing;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

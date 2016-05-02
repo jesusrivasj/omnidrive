@@ -1,0 +1,78 @@
+
+package com.aiss.omnidrive.shared.dropbox.user;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Generated;
+
+@Generated("org.jsonschema2pojo")
+public class NameDetails {
+
+    private String familiarName;
+    private String givenName;
+    private String surname;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The familiarName
+     */
+    public String getFamiliarName() {
+        return familiarName;
+    }
+
+    /**
+     * 
+     * @param familiarName
+     *     The familiar_name
+     */
+    public void setFamiliarName(String familiarName) {
+        this.familiarName = familiarName;
+    }
+
+    /**
+     * 
+     * @return
+     *     The givenName
+     */
+    public String getGivenName() {
+        return givenName;
+    }
+
+    /**
+     * 
+     * @param givenName
+     *     The given_name
+     */
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+    /**
+     * 
+     * @return
+     *     The surname
+     */
+    public String getSurname() {
+        return surname;
+    }
+
+    /**
+     * 
+     * @param surname
+     *     The surname
+     */
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

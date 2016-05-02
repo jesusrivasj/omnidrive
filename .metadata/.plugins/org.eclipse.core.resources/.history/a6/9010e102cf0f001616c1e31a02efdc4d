@@ -1,0 +1,5 @@
+package com.aiss.omnidrive.server.resources;
+
+public class DriveResource {
+
+}

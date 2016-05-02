@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.aiss.omnidrive.client.controllers.DriveController;
+import com.aiss.omnidrive.client.controllers.MainController;
+import com.aiss.omnidrive.client.rpc.DriveService;
+import com.aiss.omnidrive.client.rpc.DriveServiceAsync;
 import com.aiss.omnidrive.client.rpc.OAuthService;
 import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
 import com.aiss.omnidrive.shared.OAuthToken;
+import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -24,6 +28,7 @@ import com.google.gwt.user.client.ui.Panel;
 public class DriveMenuView extends Composite {
 	
 	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final DriveServiceAsync driveService = GWT.create(DriveService.class);
 	
 	public DriveMenuView(){
 		new DriveMenuView(new HashMap<String, String>());
@@ -43,7 +48,7 @@ public class DriveMenuView extends Composite {
 					@Override
 					public void onSuccess(OAuthToken token) {
 						if (token.isCorrect()) {
-							Date tokenExpireIn = new Date(new Date().getTime() + (30 * 24 * 60 * 60 * 1000));
+							Date tokenExpireIn = new Date(new Date().getTime() + (10 * 24 * 60 * 60 * 1000));
 							Cookies.setCookie("driveToken", token.getRefreshToken(), tokenExpireIn);
 							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
 							Cookies.setCookie("driveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
@@ -63,18 +68,78 @@ public class DriveMenuView extends Composite {
 			}
 		} else {
 			if (DriveController.isConnect()) {
-				driveMenu.add(new HTML("Conectado"));
-				driveMenu.add(new HTML("<p>" + Cookies.getCookie("driveToken") + "</p>"));
-				driveMenu.add(new HTML("<p>" + Cookies.getCookie("driveAccessToken") + "</p>"));
+				if (!DriveController.hasToken()) {
+					oauthService.refreshToken("drive", Cookies.getCookie("driveToken"), new AsyncCallback<OAuthToken>() {
+					@Override
+					public void onSuccess(OAuthToken token) {
+						// TODO Auto-generated method stub
+						if (token.isCorrect()){
+							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
+							Cookies.setCookie("driveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
+						} else {
+							Cookies.removeCookie("driveToken");
+							Window.Location.replace(GWT.getHostPageBaseURL());
+						}
+					}
+					@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+				}
+				HTML misArchivos = new HTML("Mis archivos");
+				HTML subirArchivo = new HTML("Subir archivo");
+				final HTML info;
+				
+				misArchivos.addStyleName("menuOption");
+				misArchivos.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						MainController.go("drive");
+					}
+				});
+				subirArchivo.addStyleName("menuOption");
+				subirArchivo.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				info = new HTML();
+				driveService.getUserInfo(Cookies.getCookie("driveAccessToken"), new AsyncCallback<DriveUserInfo>() {
+					@Override
+					public void onSuccess(DriveUserInfo userInfo) {
+						// TODO Auto-generated method stub
+						String spaceUsedUser;
+						spaceUsedUser = userInfo.getStorageQuota().getUsageInGB()  + 
+								" de " + userInfo.getStorageQuota().getLimitInGB() + "GB" + 
+								" usados (" + userInfo.getStorageQuota().getPercentUsage() + "%)";
+						info.setText(spaceUsedUser);
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				info.addStyleName("menuOptionDown");
+				driveMenu.add(misArchivos);
+				driveMenu.add(subirArchivo);
+				driveMenu.add(info);
 			} else {
-				Anchor connectLink = new Anchor("Conectar");
-				connectLink.removeStyleName("gwt-Anchor");
+				HTML connectLink = new HTML("Conectar");
+				connectLink.addStyleName("menuOption");
 				connectLink.addClickHandler(new ClickHandler() {
 					
 					@Override
 					public void onClick(ClickEvent event) {
 						// TODO Auto-generated method stub
-						oauthService.getAuthUrl(new AsyncCallback<String>() {
+						oauthService.getAuthUrl("drive", new AsyncCallback<String>() {
 							
 							@Override
 							public void onSuccess(String authUrl) {
@@ -95,5 +160,7 @@ public class DriveMenuView extends Composite {
 		}
 		
 		initWidget(driveMenu);
+		
 	}
+	
 }

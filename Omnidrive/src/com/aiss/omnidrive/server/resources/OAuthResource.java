@@ -23,9 +23,10 @@ public class OAuthResource {
 	private static final String DRIVE_CLIENT_SECRET = "Be6LpCB1RshhLyg7wXd8-p4A";
 	private static final String ONEDRIVE_CLIENT_ID = "";
 	private static final String ONEDRIVE_CLIENT_SECRET = "";
-	private static final String DROPBOX_CLIENT_ID = "";
-	private static final String DROPBOX_CLIENT_SECRET = "";
-	
+	private static final String DROPBOX_CLIENT_ID = "fun092l2e17f94b";
+	private static final String DROPBOX_CLIENT_SECRET = "nn0poenq238m1ut";
+	private static final String REDIRECT_URI = "http://127.0.0.1:8888/";
+	//private static final String REDIRECT_URI = "https://omni-drive.appspot.com/";
 	
 	public static String getDriveAuthUrl(){
 		String authUrl; 
@@ -36,12 +37,11 @@ public class OAuthResource {
 		
 		urlParams.put("response_type", "code");
 		urlParams.put("client_id", OAuthResource.DRIVE_CLIENT_ID);
-		urlParams.put("redirect_uri", "http://127.0.0.1:8888/");
+		urlParams.put("redirect_uri", OAuthResource.REDIRECT_URI);
 		urlParams.put("scope", "https://www.googleapis.com/auth/drive");
 		urlParams.put("state", "driveAuth");
 		urlParams.put("access_type", "offline");
-		urlParams.put("prompt", "select_account");
-		urlParams.put("include_granted_scopes", "true");
+		urlParams.put("prompt", "consent");
 		
 		authUrl += UrlUtils.parseParams(urlParams);
 		
@@ -59,7 +59,7 @@ public class OAuthResource {
 		urlParams.put("response_type", "code");
 		urlParams.put("client_id", OAuthResource.ONEDRIVE_CLIENT_ID);
 		urlParams.put("redirect_uri", "http://127.0.0.1:8888/");
-		urlParams.put("scope", "https://www.googleapis.com/auth/drive");
+		urlParams.put("scope",  OAuthResource.REDIRECT_URI);
 		urlParams.put("access_type", "offline");
 		urlParams.put("prompt", "select_account");
 		urlParams.put("include_granted_scopes", "true");
@@ -74,17 +74,13 @@ public class OAuthResource {
 		String authUrl; 
 		Map<String, String> urlParams;
 		
-		authUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+		authUrl = "https://www.dropbox.com/1/oauth2/authorize";
 		urlParams = new HashMap<String, String>();
 		
 		urlParams.put("response_type", "code");
-		urlParams.put("client_id", OAuthResource.DRIVE_CLIENT_ID);
-		urlParams.put("redirect_uri", "http://127.0.0.1:8888/");
-		urlParams.put("scope", "https://www.googleapis.com/auth/drive");
-		urlParams.put("state", "driveAuth");
-		urlParams.put("access_type", "offline");
-		urlParams.put("prompt", "select_account");
-		urlParams.put("include_granted_scopes", "true");
+		urlParams.put("client_id", OAuthResource.DROPBOX_CLIENT_ID);
+		urlParams.put("redirect_uri",  OAuthResource.REDIRECT_URI);
+		urlParams.put("state", "dropboxAuth");
 		
 		authUrl += UrlUtils.parseParams(urlParams);
 		
@@ -99,7 +95,7 @@ public class OAuthResource {
 		clientId = OAuthResource.DRIVE_CLIENT_ID;
 		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
 		grantType = "authorization_code";
-		redirectUri = "http://127.0.0.1:8888/";
+		redirectUri =  OAuthResource.REDIRECT_URI;
 		
 		token = OAuthResource.getToken(authUrl, clientId, clientSecret, grantType, redirectUri, code);
 	
@@ -114,7 +110,7 @@ public class OAuthResource {
 		clientId = OAuthResource.DRIVE_CLIENT_ID;
 		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
 		grantType = "authorization_code";
-		redirectUri = "http://127.0.0.1:8888/";
+		redirectUri =  OAuthResource.REDIRECT_URI;
 		
 		token = OAuthResource.getToken(authUrl, clientId, clientSecret, grantType, redirectUri, code);
 	
@@ -125,11 +121,11 @@ public class OAuthResource {
 		OAuthToken token;
 		String authUrl, clientId, clientSecret, grantType, redirectUri;
 		
-		authUrl = "https://www.googleapis.com/oauth2/v4/token";
-		clientId = OAuthResource.DRIVE_CLIENT_ID;
-		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
+		authUrl = "https://api.dropboxapi.com/1/oauth2/token";
+		clientId = OAuthResource.DROPBOX_CLIENT_ID;
+		clientSecret = OAuthResource.DROPBOX_CLIENT_SECRET;
 		grantType = "authorization_code";
-		redirectUri = "http://127.0.0.1:8888/";
+		redirectUri =  OAuthResource.REDIRECT_URI;
 		
 		token = OAuthResource.getToken(authUrl, clientId, clientSecret, grantType, redirectUri, code);
 	
@@ -156,7 +152,70 @@ public class OAuthResource {
 		connection.setMethod(Method.POST);
 		connection.accept(MediaType.APPLICATION_JSON);
 		connection.setProtocol(Protocol.HTTPS);
-		//connection.setHostRef("www.googleapis.com");
+		cacheDirectives.add(CacheDirective.noCache());
+		connection.getResponse().setCacheDirectives(cacheDirectives);
+		
+		try {
+			token = connection.post(requestBody.getWebRepresentation(), OAuthToken.class);
+		} catch (ResourceException e) {
+			Integer errorCode = e.getStatus().getCode();
+			token = new OAuthToken();
+			token.setError(errorCode.toString());
+		}
+		
+		return token;
+	}
+	
+	public static OAuthToken refreshDriveToken(String refreshToken){
+		OAuthToken token;
+		String authUrl, clientId, clientSecret, grantType, redirectUri;
+		
+		authUrl = "https://www.googleapis.com/oauth2/v4/token";
+		clientId = OAuthResource.DRIVE_CLIENT_ID;
+		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
+		grantType = "refresh_token";
+		redirectUri =  OAuthResource.REDIRECT_URI;
+		
+		token = OAuthResource.refreshToken(authUrl, clientId, clientSecret, grantType, redirectUri, refreshToken);
+	
+		return token;
+	}
+	
+	public static OAuthToken refreshOnedriveToken(String refreshToken){
+		OAuthToken token;
+		String authUrl, clientId, clientSecret, grantType, redirectUri;
+		
+		authUrl = "https://www.googleapis.com/oauth2/v4/token";
+		clientId = OAuthResource.ONEDRIVE_CLIENT_ID;
+		clientSecret = OAuthResource.ONEDRIVE_CLIENT_SECRET;
+		grantType = "refresh_token";
+		redirectUri =  OAuthResource.REDIRECT_URI;
+		
+		token = OAuthResource.refreshToken(authUrl, clientId, clientSecret, grantType, redirectUri, refreshToken);
+	
+		return token;
+	}
+	
+	public static OAuthToken refreshToken(String authUrl, String clientId, String clientSecret, String grantType, String redirectUri, String refreshToken){
+		OAuthToken token;
+		ClientResource connection;
+		Form requestBody;
+		List<CacheDirective> cacheDirectives;
+				
+		cacheDirectives = new ArrayList<CacheDirective>();
+		
+		requestBody = new Form();
+		requestBody.add("refresh_token", refreshToken);
+		requestBody.add("client_id", clientId);
+		requestBody.add("client_secret", clientSecret);
+		requestBody.add("redirect_uri", redirectUri);
+		requestBody.add("grant_type", grantType);
+		
+		connection = new ClientResource(authUrl);
+		
+		connection.setMethod(Method.POST);
+		connection.accept(MediaType.APPLICATION_JSON);
+		connection.setProtocol(Protocol.HTTPS);
 		cacheDirectives.add(CacheDirective.noCache());
 		connection.getResponse().setCacheDirectives(cacheDirectives);
 		

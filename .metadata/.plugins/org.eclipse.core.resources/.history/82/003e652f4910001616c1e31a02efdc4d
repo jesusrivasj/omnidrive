@@ -1,0 +1,234 @@
+
+package com.aiss.omnidrive.shared.dropbox.user;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@Generated("org.jsonschema2pojo")
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class DropboxUserInfo {
+
+    private Long uid;
+    private String displayName;
+    private NameDetails nameDetails;
+    private String referralLink;
+    private String country;
+    private String locale;
+    private String email;
+    private Boolean emailVerified;
+    private Boolean isPaired;
+    private Team team;
+    private QuotaInfo quotaInfo;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The uid
+     */
+    public Long getUid() {
+        return uid;
+    }
+
+    /**
+     * 
+     * @param uid
+     *     The uid
+     */
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    /**
+     * 
+     * @return
+     *     The displayName
+     */
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    /**
+     * 
+     * @param displayName
+     *     The display_name
+     */
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    /**
+     * 
+     * @return
+     *     The nameDetails
+     */
+    public NameDetails getNameDetails() {
+        return nameDetails;
+    }
+
+    /**
+     * 
+     * @param nameDetails
+     *     The name_details
+     */
+    public void setNameDetails(NameDetails nameDetails) {
+        this.nameDetails = nameDetails;
+    }
+
+    /**
+     * 
+     * @return
+     *     The referralLink
+     */
+    public String getReferralLink() {
+        return referralLink;
+    }
+
+    /**
+     * 
+     * @param referralLink
+     *     The referral_link
+     */
+    public void setReferralLink(String referralLink) {
+        this.referralLink = referralLink;
+    }
+
+    /**
+     * 
+     * @return
+     *     The country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * 
+     * @param country
+     *     The country
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    /**
+     * 
+     * @return
+     *     The locale
+     */
+    public String getLocale() {
+        return locale;
+    }
+
+    /**
+     * 
+     * @param locale
+     *     The locale
+     */
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * 
+     * @return
+     *     The email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * 
+     * @param email
+     *     The email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * 
+     * @return
+     *     The emailVerified
+     */
+    public Boolean getEmailVerified() {
+        return emailVerified;
+    }
+
+    /**
+     * 
+     * @param emailVerified
+     *     The email_verified
+     */
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    /**
+     * 
+     * @return
+     *     The isPaired
+     */
+    public Boolean getIsPaired() {
+        return isPaired;
+    }
+
+    /**
+     * 
+     * @param isPaired
+     *     The is_paired
+     */
+    public void setIsPaired(Boolean isPaired) {
+        this.isPaired = isPaired;
+    }
+
+    /**
+     * 
+     * @return
+     *     The team
+     */
+    public Team getTeam() {
+        return team;
+    }
+
+    /**
+     * 
+     * @param team
+     *     The team
+     */
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    /**
+     * 
+     * @return
+     *     The quotaInfo
+     */
+    public QuotaInfo getQuotaInfo() {
+        return quotaInfo;
+    }
+
+    /**
+     * 
+     * @param quotaInfo
+     *     The quota_info
+     */
+    public void setQuotaInfo(QuotaInfo quotaInfo) {
+        this.quotaInfo = quotaInfo;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

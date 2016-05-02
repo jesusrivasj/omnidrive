@@ -1,0 +1,5 @@
+package com.aiss.omnidrive.client.rpc;
+
+public interface DriveServiceAsync {
+
+}

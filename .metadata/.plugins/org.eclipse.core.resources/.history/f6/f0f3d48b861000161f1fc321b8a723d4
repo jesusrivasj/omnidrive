@@ -1,0 +1,5 @@
+package com.aiss.omnidrive.client.views.drive;
+
+public class DriveFilesListView {
+
+}

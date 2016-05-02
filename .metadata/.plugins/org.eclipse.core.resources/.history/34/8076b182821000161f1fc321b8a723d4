@@ -1,0 +1,164 @@
+package com.aiss.omnidrive.client.views.drive;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.aiss.omnidrive.client.controllers.DriveController;
+import com.aiss.omnidrive.client.rpc.DriveService;
+import com.aiss.omnidrive.client.rpc.DriveServiceAsync;
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.aiss.omnidrive.shared.OAuthToken;
+import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Panel;
+
+public class DriveMenuView extends Composite {
+	
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final DriveServiceAsync driveService = GWT.create(DriveService.class);
+	
+	public DriveMenuView(){
+		new DriveMenuView(new HashMap<String, String>());
+	}
+	
+	public DriveMenuView(Map<String, String> params){
+		final Panel driveMenu;
+		
+		driveMenu = new FlowPanel();
+		driveMenu.addStyleName("sidenavMenuContent");
+		
+		if (!History.getToken().isEmpty()) {
+			if (History.getToken().equals("driveConnect")) {
+				String code = Window.Location.getParameterMap().get("authCode").get(0);
+				oauthService.getToken("drive", code, new AsyncCallback<OAuthToken>() {
+
+					@Override
+					public void onSuccess(OAuthToken token) {
+						if (token.isCorrect()) {
+							Date tokenExpireIn = new Date(new Date().getTime() + (10 * 24 * 60 * 60 * 1000));
+							Cookies.setCookie("driveToken", token.getRefreshToken(), tokenExpireIn);
+							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
+							Cookies.setCookie("driveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
+							Window.Location.replace(GWT.getHostPageBaseURL());
+						} else {
+							driveMenu.add(new HTML(token.getError()));
+						}
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+				});
+			}
+		} else {
+			if (DriveController.isConnect()) {
+				if (!DriveController.hasToken()) {
+					oauthService.refreshToken("drive", Cookies.getCookie("driveToken"), new AsyncCallback<OAuthToken>() {
+					@Override
+					public void onSuccess(OAuthToken token) {
+						// TODO Auto-generated method stub
+						if (token.isCorrect()){
+							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
+							Cookies.setCookie("driveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
+						} else {
+							Cookies.removeCookie("driveToken");
+							Window.Location.replace(GWT.getHostPageBaseURL());
+						}
+					}
+					@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+				}
+				HTML misArchivos = new HTML("Mis archivos");
+				HTML subirArchivo = new HTML("Subir archivo");
+				final HTML info;
+				
+				misArchivos.addStyleName("menuOption");
+				misArchivos.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				subirArchivo.addStyleName("menuOption");
+				subirArchivo.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				info = new HTML();
+				driveService.getUserInfo(Cookies.getCookie("driveAccessToken"), new AsyncCallback<DriveUserInfo>() {
+					@Override
+					public void onSuccess(DriveUserInfo userInfo) {
+						// TODO Auto-generated method stub
+						String useUser;
+						useUser = userInfo.getStorageQuota().getUsageInGB()  + 
+								" de " + userInfo.getStorageQuota().getLimitInGB() + "GB" + 
+								" usados (" + userInfo.getStorageQuota().getPercentUsage() + "%)";
+						info.setText(useUser);
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				info.addStyleName("menuOptionDown");
+				driveMenu.add(misArchivos);
+				driveMenu.add(info);
+			} else {
+				HTML connectLink = new HTML("Conectar");
+				connectLink.addStyleName("menuOption");
+				connectLink.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						oauthService.getAuthUrl("drive", new AsyncCallback<String>() {
+							
+							@Override
+							public void onSuccess(String authUrl) {
+								// TODO Auto-generated method stub
+								Window.Location.replace(authUrl);
+							}
+							
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								Window.alert(caught.getMessage());
+							}
+						});
+					}
+				});
+				driveMenu.add(connectLink);
+			}
+		}
+		
+		initWidget(driveMenu);
+		
+	}
+	
+}

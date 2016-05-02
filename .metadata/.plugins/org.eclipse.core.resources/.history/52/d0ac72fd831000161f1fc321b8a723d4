@@ -1,0 +1,891 @@
+
+package com.aiss.omnidrive.shared.drive.files;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "kind",
+    "id",
+    "name",
+    "mimeType",
+    "starred",
+    "trashed",
+    "explicitlyTrashed",
+    "parents",
+    "spaces",
+    "version",
+    "webContentLink",
+    "webViewLink",
+    "iconLink",
+    "thumbnailLink",
+    "viewedByMe",
+    "createdTime",
+    "modifiedTime",
+    "modifiedByMeTime",
+    "owners",
+    "lastModifyingUser",
+    "shared",
+    "ownedByMe",
+    "capabilities",
+    "viewersCanCopyContent",
+    "writersCanShare",
+    "permissions",
+    "originalFilename",
+    "fullFileExtension",
+    "fileExtension",
+    "md5Checksum",
+    "size",
+    "quotaBytesUsed",
+    "headRevisionId",
+    "isAppAuthorized",
+    "viewedByMeTime",
+    "imageMediaMetadata",
+    "folderColorRgb"
+})
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class DriveFile implements Serializable {
+
+    @JsonProperty("kind")
+    private String kind;
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("mimeType")
+    private String mimeType;
+    @JsonProperty("starred")
+    private Boolean starred;
+    @JsonProperty("trashed")
+    private Boolean trashed;
+    @JsonProperty("explicitlyTrashed")
+    private Boolean explicitlyTrashed;
+    @JsonProperty("parents")
+    private List<String> parents = new ArrayList<String>();
+    @JsonProperty("spaces")
+    private List<String> spaces = new ArrayList<String>();
+    @JsonProperty("version")
+    private String version;
+    @JsonProperty("webContentLink")
+    private String webContentLink;
+    @JsonProperty("webViewLink")
+    private String webViewLink;
+    @JsonProperty("iconLink")
+    private String iconLink;
+    @JsonProperty("thumbnailLink")
+    private String thumbnailLink;
+    @JsonProperty("viewedByMe")
+    private Boolean viewedByMe;
+    @JsonProperty("createdTime")
+    private String createdTime;
+    @JsonProperty("modifiedTime")
+    private String modifiedTime;
+    @JsonProperty("modifiedByMeTime")
+    private String modifiedByMeTime;
+    @JsonProperty("owners")
+    private List<Owner> owners = new ArrayList<Owner>();
+    @JsonProperty("lastModifyingUser")
+    private LastModifyingUser lastModifyingUser;
+    @JsonProperty("shared")
+    private Boolean shared;
+    @JsonProperty("ownedByMe")
+    private Boolean ownedByMe;
+    @JsonProperty("capabilities")
+    private DriveCapabilities capabilities;
+    @JsonProperty("viewersCanCopyContent")
+    private Boolean viewersCanCopyContent;
+    @JsonProperty("writersCanShare")
+    private Boolean writersCanShare;
+    @JsonProperty("permissions")
+    private List<DrivePermission> permissions = new ArrayList<DrivePermission>();
+    @JsonProperty("originalFilename")
+    private String originalFilename;
+    @JsonProperty("fullFileExtension")
+    private String fullFileExtension;
+    @JsonProperty("fileExtension")
+    private String fileExtension;
+    @JsonProperty("md5Checksum")
+    private String md5Checksum;
+    @JsonProperty("size")
+    private String size;
+    @JsonProperty("quotaBytesUsed")
+    private String quotaBytesUsed;
+    @JsonProperty("headRevisionId")
+    private String headRevisionId;
+    @JsonProperty("isAppAuthorized")
+    private Boolean isAppAuthorized;
+    @JsonProperty("viewedByMeTime")
+    private String viewedByMeTime;
+    @JsonProperty("imageMediaMetadata")
+    private ImageMediaMetadata imageMediaMetadata;
+    @JsonProperty("folderColorRgb")
+    private String folderColorRgb;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The kind
+     */
+    @JsonProperty("kind")
+    public String getKind() {
+        return kind;
+    }
+
+    /**
+     * 
+     * @param kind
+     *     The kind
+     */
+    @JsonProperty("kind")
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    /**
+     * 
+     * @return
+     *     The id
+     */
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * 
+     * @param id
+     *     The id
+     */
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * 
+     * @return
+     *     The name
+     */
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 
+     * @param name
+     *     The name
+     */
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 
+     * @return
+     *     The mimeType
+     */
+    @JsonProperty("mimeType")
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    /**
+     * 
+     * @param mimeType
+     *     The mimeType
+     */
+    @JsonProperty("mimeType")
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    /**
+     * 
+     * @return
+     *     The starred
+     */
+    @JsonProperty("starred")
+    public Boolean getStarred() {
+        return starred;
+    }
+
+    /**
+     * 
+     * @param starred
+     *     The starred
+     */
+    @JsonProperty("starred")
+    public void setStarred(Boolean starred) {
+        this.starred = starred;
+    }
+
+    /**
+     * 
+     * @return
+     *     The trashed
+     */
+    @JsonProperty("trashed")
+    public Boolean getTrashed() {
+        return trashed;
+    }
+
+    /**
+     * 
+     * @param trashed
+     *     The trashed
+     */
+    @JsonProperty("trashed")
+    public void setTrashed(Boolean trashed) {
+        this.trashed = trashed;
+    }
+
+    /**
+     * 
+     * @return
+     *     The explicitlyTrashed
+     */
+    @JsonProperty("explicitlyTrashed")
+    public Boolean getExplicitlyTrashed() {
+        return explicitlyTrashed;
+    }
+
+    /**
+     * 
+     * @param explicitlyTrashed
+     *     The explicitlyTrashed
+     */
+    @JsonProperty("explicitlyTrashed")
+    public void setExplicitlyTrashed(Boolean explicitlyTrashed) {
+        this.explicitlyTrashed = explicitlyTrashed;
+    }
+
+    /**
+     * 
+     * @return
+     *     The parents
+     */
+    @JsonProperty("parents")
+    public List<String> getParents() {
+        return parents;
+    }
+
+    /**
+     * 
+     * @param parents
+     *     The parents
+     */
+    @JsonProperty("parents")
+    public void setParents(List<String> parents) {
+        this.parents = parents;
+    }
+
+    /**
+     * 
+     * @return
+     *     The spaces
+     */
+    @JsonProperty("spaces")
+    public List<String> getSpaces() {
+        return spaces;
+    }
+
+    /**
+     * 
+     * @param spaces
+     *     The spaces
+     */
+    @JsonProperty("spaces")
+    public void setSpaces(List<String> spaces) {
+        this.spaces = spaces;
+    }
+
+    /**
+     * 
+     * @return
+     *     The version
+     */
+    @JsonProperty("version")
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * 
+     * @param version
+     *     The version
+     */
+    @JsonProperty("version")
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    /**
+     * 
+     * @return
+     *     The webContentLink
+     */
+    @JsonProperty("webContentLink")
+    public String getWebContentLink() {
+        return webContentLink;
+    }
+
+    /**
+     * 
+     * @param webContentLink
+     *     The webContentLink
+     */
+    @JsonProperty("webContentLink")
+    public void setWebContentLink(String webContentLink) {
+        this.webContentLink = webContentLink;
+    }
+
+    /**
+     * 
+     * @return
+     *     The webViewLink
+     */
+    @JsonProperty("webViewLink")
+    public String getWebViewLink() {
+        return webViewLink;
+    }
+
+    /**
+     * 
+     * @param webViewLink
+     *     The webViewLink
+     */
+    @JsonProperty("webViewLink")
+    public void setWebViewLink(String webViewLink) {
+        this.webViewLink = webViewLink;
+    }
+
+    /**
+     * 
+     * @return
+     *     The iconLink
+     */
+    @JsonProperty("iconLink")
+    public String getIconLink() {
+        return iconLink;
+    }
+
+    /**
+     * 
+     * @param iconLink
+     *     The iconLink
+     */
+    @JsonProperty("iconLink")
+    public void setIconLink(String iconLink) {
+        this.iconLink = iconLink;
+    }
+
+    /**
+     * 
+     * @return
+     *     The thumbnailLink
+     */
+    @JsonProperty("thumbnailLink")
+    public String getThumbnailLink() {
+        return thumbnailLink;
+    }
+
+    /**
+     * 
+     * @param thumbnailLink
+     *     The thumbnailLink
+     */
+    @JsonProperty("thumbnailLink")
+    public void setThumbnailLink(String thumbnailLink) {
+        this.thumbnailLink = thumbnailLink;
+    }
+
+    /**
+     * 
+     * @return
+     *     The viewedByMe
+     */
+    @JsonProperty("viewedByMe")
+    public Boolean getViewedByMe() {
+        return viewedByMe;
+    }
+
+    /**
+     * 
+     * @param viewedByMe
+     *     The viewedByMe
+     */
+    @JsonProperty("viewedByMe")
+    public void setViewedByMe(Boolean viewedByMe) {
+        this.viewedByMe = viewedByMe;
+    }
+
+    /**
+     * 
+     * @return
+     *     The createdTime
+     */
+    @JsonProperty("createdTime")
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    /**
+     * 
+     * @param createdTime
+     *     The createdTime
+     */
+    @JsonProperty("createdTime")
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    /**
+     * 
+     * @return
+     *     The modifiedTime
+     */
+    @JsonProperty("modifiedTime")
+    public String getModifiedTime() {
+        return modifiedTime;
+    }
+
+    /**
+     * 
+     * @param modifiedTime
+     *     The modifiedTime
+     */
+    @JsonProperty("modifiedTime")
+    public void setModifiedTime(String modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
+    /**
+     * 
+     * @return
+     *     The modifiedByMeTime
+     */
+    @JsonProperty("modifiedByMeTime")
+    public String getModifiedByMeTime() {
+        return modifiedByMeTime;
+    }
+
+    /**
+     * 
+     * @param modifiedByMeTime
+     *     The modifiedByMeTime
+     */
+    @JsonProperty("modifiedByMeTime")
+    public void setModifiedByMeTime(String modifiedByMeTime) {
+        this.modifiedByMeTime = modifiedByMeTime;
+    }
+
+    /**
+     * 
+     * @return
+     *     The owners
+     */
+    @JsonProperty("owners")
+    public List<Owner> getOwners() {
+        return owners;
+    }
+
+    /**
+     * 
+     * @param owners
+     *     The owners
+     */
+    @JsonProperty("owners")
+    public void setOwners(List<Owner> owners) {
+        this.owners = owners;
+    }
+
+    /**
+     * 
+     * @return
+     *     The lastModifyingUser
+     */
+    @JsonProperty("lastModifyingUser")
+    public LastModifyingUser getLastModifyingUser() {
+        return lastModifyingUser;
+    }
+
+    /**
+     * 
+     * @param lastModifyingUser
+     *     The lastModifyingUser
+     */
+    @JsonProperty("lastModifyingUser")
+    public void setLastModifyingUser(LastModifyingUser lastModifyingUser) {
+        this.lastModifyingUser = lastModifyingUser;
+    }
+
+    /**
+     * 
+     * @return
+     *     The shared
+     */
+    @JsonProperty("shared")
+    public Boolean getShared() {
+        return shared;
+    }
+
+    /**
+     * 
+     * @param shared
+     *     The shared
+     */
+    @JsonProperty("shared")
+    public void setShared(Boolean shared) {
+        this.shared = shared;
+    }
+
+    /**
+     * 
+     * @return
+     *     The ownedByMe
+     */
+    @JsonProperty("ownedByMe")
+    public Boolean getOwnedByMe() {
+        return ownedByMe;
+    }
+
+    /**
+     * 
+     * @param ownedByMe
+     *     The ownedByMe
+     */
+    @JsonProperty("ownedByMe")
+    public void setOwnedByMe(Boolean ownedByMe) {
+        this.ownedByMe = ownedByMe;
+    }
+
+    /**
+     * 
+     * @return
+     *     The capabilities
+     */
+    @JsonProperty("capabilities")
+    public DriveCapabilities getCapabilities() {
+        return capabilities;
+    }
+
+    /**
+     * 
+     * @param capabilities
+     *     The capabilities
+     */
+    @JsonProperty("capabilities")
+    public void setCapabilities(DriveCapabilities capabilities) {
+        this.capabilities = capabilities;
+    }
+
+    /**
+     * 
+     * @return
+     *     The viewersCanCopyContent
+     */
+    @JsonProperty("viewersCanCopyContent")
+    public Boolean getViewersCanCopyContent() {
+        return viewersCanCopyContent;
+    }
+
+    /**
+     * 
+     * @param viewersCanCopyContent
+     *     The viewersCanCopyContent
+     */
+    @JsonProperty("viewersCanCopyContent")
+    public void setViewersCanCopyContent(Boolean viewersCanCopyContent) {
+        this.viewersCanCopyContent = viewersCanCopyContent;
+    }
+
+    /**
+     * 
+     * @return
+     *     The writersCanShare
+     */
+    @JsonProperty("writersCanShare")
+    public Boolean getWritersCanShare() {
+        return writersCanShare;
+    }
+
+    /**
+     * 
+     * @param writersCanShare
+     *     The writersCanShare
+     */
+    @JsonProperty("writersCanShare")
+    public void setWritersCanShare(Boolean writersCanShare) {
+        this.writersCanShare = writersCanShare;
+    }
+
+    /**
+     * 
+     * @return
+     *     The permissions
+     */
+    @JsonProperty("permissions")
+    public List<DrivePermission> getPermissions() {
+        return permissions;
+    }
+
+    /**
+     * 
+     * @param permissions
+     *     The permissions
+     */
+    @JsonProperty("permissions")
+    public void setPermissions(List<DrivePermission> permissions) {
+        this.permissions = permissions;
+    }
+
+    /**
+     * 
+     * @return
+     *     The originalFilename
+     */
+    @JsonProperty("originalFilename")
+    public String getOriginalFilename() {
+        return originalFilename;
+    }
+
+    /**
+     * 
+     * @param originalFilename
+     *     The originalFilename
+     */
+    @JsonProperty("originalFilename")
+    public void setOriginalFilename(String originalFilename) {
+        this.originalFilename = originalFilename;
+    }
+
+    /**
+     * 
+     * @return
+     *     The fullFileExtension
+     */
+    @JsonProperty("fullFileExtension")
+    public String getFullFileExtension() {
+        return fullFileExtension;
+    }
+
+    /**
+     * 
+     * @param fullFileExtension
+     *     The fullFileExtension
+     */
+    @JsonProperty("fullFileExtension")
+    public void setFullFileExtension(String fullFileExtension) {
+        this.fullFileExtension = fullFileExtension;
+    }
+
+    /**
+     * 
+     * @return
+     *     The fileExtension
+     */
+    @JsonProperty("fileExtension")
+    public String getFileExtension() {
+        return fileExtension;
+    }
+
+    /**
+     * 
+     * @param fileExtension
+     *     The fileExtension
+     */
+    @JsonProperty("fileExtension")
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
+
+    /**
+     * 
+     * @return
+     *     The md5Checksum
+     */
+    @JsonProperty("md5Checksum")
+    public String getMd5Checksum() {
+        return md5Checksum;
+    }
+
+    /**
+     * 
+     * @param md5Checksum
+     *     The md5Checksum
+     */
+    @JsonProperty("md5Checksum")
+    public void setMd5Checksum(String md5Checksum) {
+        this.md5Checksum = md5Checksum;
+    }
+
+    /**
+     * 
+     * @return
+     *     The size
+     */
+    @JsonProperty("size")
+    public String getSize() {
+        return size;
+    }
+
+    /**
+     * 
+     * @param size
+     *     The size
+     */
+    @JsonProperty("size")
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    /**
+     * 
+     * @return
+     *     The quotaBytesUsed
+     */
+    @JsonProperty("quotaBytesUsed")
+    public String getQuotaBytesUsed() {
+        return quotaBytesUsed;
+    }
+
+    /**
+     * 
+     * @param quotaBytesUsed
+     *     The quotaBytesUsed
+     */
+    @JsonProperty("quotaBytesUsed")
+    public void setQuotaBytesUsed(String quotaBytesUsed) {
+        this.quotaBytesUsed = quotaBytesUsed;
+    }
+
+    /**
+     * 
+     * @return
+     *     The headRevisionId
+     */
+    @JsonProperty("headRevisionId")
+    public String getHeadRevisionId() {
+        return headRevisionId;
+    }
+
+    /**
+     * 
+     * @param headRevisionId
+     *     The headRevisionId
+     */
+    @JsonProperty("headRevisionId")
+    public void setHeadRevisionId(String headRevisionId) {
+        this.headRevisionId = headRevisionId;
+    }
+
+    /**
+     * 
+     * @return
+     *     The isAppAuthorized
+     */
+    @JsonProperty("isAppAuthorized")
+    public Boolean getIsAppAuthorized() {
+        return isAppAuthorized;
+    }
+
+    /**
+     * 
+     * @param isAppAuthorized
+     *     The isAppAuthorized
+     */
+    @JsonProperty("isAppAuthorized")
+    public void setIsAppAuthorized(Boolean isAppAuthorized) {
+        this.isAppAuthorized = isAppAuthorized;
+    }
+
+    /**
+     * 
+     * @return
+     *     The viewedByMeTime
+     */
+    @JsonProperty("viewedByMeTime")
+    public String getViewedByMeTime() {
+        return viewedByMeTime;
+    }
+
+    /**
+     * 
+     * @param viewedByMeTime
+     *     The viewedByMeTime
+     */
+    @JsonProperty("viewedByMeTime")
+    public void setViewedByMeTime(String viewedByMeTime) {
+        this.viewedByMeTime = viewedByMeTime;
+    }
+
+    /**
+     * 
+     * @return
+     *     The imageMediaMetadata
+     */
+    @JsonProperty("imageMediaMetadata")
+    public ImageMediaMetadata getImageMediaMetadata() {
+        return imageMediaMetadata;
+    }
+
+    /**
+     * 
+     * @param imageMediaMetadata
+     *     The imageMediaMetadata
+     */
+    @JsonProperty("imageMediaMetadata")
+    public void setImageMediaMetadata(ImageMediaMetadata imageMediaMetadata) {
+        this.imageMediaMetadata = imageMediaMetadata;
+    }
+
+    /**
+     * 
+     * @return
+     *     The folderColorRgb
+     */
+    @JsonProperty("folderColorRgb")
+    public String getFolderColorRgb() {
+        return folderColorRgb;
+    }
+
+    /**
+     * 
+     * @param folderColorRgb
+     *     The folderColorRgb
+     */
+    @JsonProperty("folderColorRgb")
+    public void setFolderColorRgb(String folderColorRgb) {
+        this.folderColorRgb = folderColorRgb;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

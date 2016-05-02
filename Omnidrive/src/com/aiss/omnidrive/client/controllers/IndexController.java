@@ -62,8 +62,10 @@ public class IndexController {
 	
 	protected static void updateSidenav(Map<String, String> params){
 		Panel sidenav = RootPanel.get("sidenav");
+		SidenavView newSidenav = new SidenavView(params);
+		
 		sidenav.clear();
-		sidenav.add(new SidenavView(params));
+		sidenav.add(newSidenav);
 	}
 	
 	protected static void queOfrecemos(Map<String, String> params){

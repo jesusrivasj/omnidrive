@@ -1,0 +1,107 @@
+
+package com.aiss.omnidrive.shared.dropbox.user;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "familiar_name",
+    "given_name",
+    "surname"
+})
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class DropboxNameDetails implements Serializable {
+
+    @JsonProperty("familiar_name")
+    private String familiarName;
+    @JsonProperty("given_name")
+    private String givenName;
+    @JsonProperty("surname")
+    private String surname;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The familiarName
+     */
+    @JsonProperty("familiar_name")
+    public String getFamiliarName() {
+        return familiarName;
+    }
+
+    /**
+     * 
+     * @param familiarName
+     *     The familiar_name
+     */
+    @JsonProperty("familiar_name")
+    public void setFamiliarName(String familiarName) {
+        this.familiarName = familiarName;
+    }
+
+    /**
+     * 
+     * @return
+     *     The givenName
+     */
+    @JsonProperty("given_name")
+    public String getGivenName() {
+        return givenName;
+    }
+
+    /**
+     * 
+     * @param givenName
+     *     The given_name
+     */
+    @JsonProperty("given_name")
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+    /**
+     * 
+     * @return
+     *     The surname
+     */
+    @JsonProperty("surname")
+    public String getSurname() {
+        return surname;
+    }
+
+    /**
+     * 
+     * @param surname
+     *     The surname
+     */
+    @JsonProperty("surname")
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

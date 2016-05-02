@@ -1,0 +1,8 @@
+package com.aiss.omnidrive.client.rpc;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+public interface DriveServiceAsync {
+	void getUserInfo(String token, AsyncCallback<DriveUserInfo> callback)
+			throws IllegalArgumentException;
+}

@@ -1,0 +1,242 @@
+
+package com.aiss.omnidrive.shared.drive;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Generated;
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "kind",
+    "user",
+    "storageQuota",
+    "importFormats",
+    "exportFormats",
+    "maxImportSizes",
+    "maxUploadSize",
+    "appInstalled",
+    "folderColorPalette"
+})
+public class DriveUserInfo {
+
+    @JsonProperty("kind")
+    private String kind;
+    @JsonProperty("user")
+    private DriveUser user;
+    @JsonProperty("storageQuota")
+    private DriveStorageQuota storageQuota;
+    @JsonProperty("importFormats")
+    private DriveImportFormats importFormats;
+    @JsonProperty("exportFormats")
+    private DriveExportFormats exportFormats;
+    @JsonProperty("maxImportSizes")
+    private DriveMaxImportSizes maxImportSizes;
+    @JsonProperty("maxUploadSize")
+    private String maxUploadSize;
+    @JsonProperty("appInstalled")
+    private Boolean appInstalled;
+    @JsonProperty("folderColorPalette")
+    private List<String> folderColorPalette = new ArrayList<String>();
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The kind
+     */
+    @JsonProperty("kind")
+    public String getKind() {
+        return kind;
+    }
+
+    /**
+     * 
+     * @param kind
+     *     The kind
+     */
+    @JsonProperty("kind")
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    /**
+     * 
+     * @return
+     *     The user
+     */
+    @JsonProperty("user")
+    public DriveUser getUser() {
+        return user;
+    }
+
+    /**
+     * 
+     * @param user
+     *     The user
+     */
+    @JsonProperty("user")
+    public void setUser(DriveUser user) {
+        this.user = user;
+    }
+
+    /**
+     * 
+     * @return
+     *     The storageQuota
+     */
+    @JsonProperty("storageQuota")
+    public DriveStorageQuota getStorageQuota() {
+        return storageQuota;
+    }
+
+    /**
+     * 
+     * @param storageQuota
+     *     The storageQuota
+     */
+    @JsonProperty("storageQuota")
+    public void setStorageQuota(DriveStorageQuota storageQuota) {
+        this.storageQuota = storageQuota;
+    }
+
+    /**
+     * 
+     * @return
+     *     The importFormats
+     */
+    @JsonProperty("importFormats")
+    public DriveImportFormats getImportFormats() {
+        return importFormats;
+    }
+
+    /**
+     * 
+     * @param importFormats
+     *     The importFormats
+     */
+    @JsonProperty("importFormats")
+    public void setImportFormats(DriveImportFormats importFormats) {
+        this.importFormats = importFormats;
+    }
+
+    /**
+     * 
+     * @return
+     *     The exportFormats
+     */
+    @JsonProperty("exportFormats")
+    public DriveExportFormats getExportFormats() {
+        return exportFormats;
+    }
+
+    /**
+     * 
+     * @param exportFormats
+     *     The exportFormats
+     */
+    @JsonProperty("exportFormats")
+    public void setExportFormats(DriveExportFormats exportFormats) {
+        this.exportFormats = exportFormats;
+    }
+
+    /**
+     * 
+     * @return
+     *     The maxImportSizes
+     */
+    @JsonProperty("maxImportSizes")
+    public DriveMaxImportSizes getMaxImportSizes() {
+        return maxImportSizes;
+    }
+
+    /**
+     * 
+     * @param maxImportSizes
+     *     The maxImportSizes
+     */
+    @JsonProperty("maxImportSizes")
+    public void setMaxImportSizes(DriveMaxImportSizes maxImportSizes) {
+        this.maxImportSizes = maxImportSizes;
+    }
+
+    /**
+     * 
+     * @return
+     *     The maxUploadSize
+     */
+    @JsonProperty("maxUploadSize")
+    public String getMaxUploadSize() {
+        return maxUploadSize;
+    }
+
+    /**
+     * 
+     * @param maxUploadSize
+     *     The maxUploadSize
+     */
+    @JsonProperty("maxUploadSize")
+    public void setMaxUploadSize(String maxUploadSize) {
+        this.maxUploadSize = maxUploadSize;
+    }
+
+    /**
+     * 
+     * @return
+     *     The appInstalled
+     */
+    @JsonProperty("appInstalled")
+    public Boolean getAppInstalled() {
+        return appInstalled;
+    }
+
+    /**
+     * 
+     * @param appInstalled
+     *     The appInstalled
+     */
+    @JsonProperty("appInstalled")
+    public void setAppInstalled(Boolean appInstalled) {
+        this.appInstalled = appInstalled;
+    }
+
+    /**
+     * 
+     * @return
+     *     The folderColorPalette
+     */
+    @JsonProperty("folderColorPalette")
+    public List<String> getFolderColorPalette() {
+        return folderColorPalette;
+    }
+
+    /**
+     * 
+     * @param folderColorPalette
+     *     The folderColorPalette
+     */
+    @JsonProperty("folderColorPalette")
+    public void setFolderColorPalette(List<String> folderColorPalette) {
+        this.folderColorPalette = folderColorPalette;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
