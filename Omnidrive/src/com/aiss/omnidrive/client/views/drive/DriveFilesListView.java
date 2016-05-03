@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.aiss.omnidrive.client.controllers.DriveController;
+import com.aiss.omnidrive.client.controllers.MainController;
 import com.aiss.omnidrive.client.rpc.DriveService;
 import com.aiss.omnidrive.client.rpc.DriveServiceAsync;
 import com.aiss.omnidrive.client.rpc.OAuthService;
@@ -13,6 +14,10 @@ import com.aiss.omnidrive.shared.OAuthToken;
 import com.aiss.omnidrive.shared.drive.files.DriveFile;
 import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -33,6 +38,7 @@ public class DriveFilesListView extends Composite {
 	public DriveFilesListView(final Map<String, String> params){
 		final Panel content, infoBar;
 		final String parent;
+		final HTML directorioAnterior;
 		if (DriveController.isConnect()) {
 			content = new FlowPanel();
 			if (!DriveController.hasToken()) {
@@ -59,10 +65,21 @@ public class DriveFilesListView extends Composite {
 				parent = params.get("parent");
 			} else {
 				parent = "root";
+				params.put("directorioAnterior", "root");
 			}
 			infoBar = new FlowPanel();
 			infoBar.addStyleName("infobar");
-			infoBar.add(new HTML(params.get("directorioAnterior")));
+			directorioAnterior = new HTML(params.get("directorioAnterior"));
+			directorioAnterior.addDoubleClickHandler(new DoubleClickHandler() {
+				
+				@Override
+				public void onDoubleClick(DoubleClickEvent event) {
+					// TODO Auto-generated method stub
+					params.put("parent", params.get("directorioAnterior"));
+					MainController.go("drive", params);
+				}
+			});
+			infoBar.add(directorioAnterior);
 			content.add(infoBar);
 			driveService.getFiles(Cookies.getCookie("driveAccessToken"), parent, new AsyncCallback<DriveFilesList>() {
 				

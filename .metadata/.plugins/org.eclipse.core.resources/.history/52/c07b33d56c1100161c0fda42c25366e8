@@ -1,0 +1,19 @@
+package com.aiss.omnidrive.server.servlets;
+
+import java.io.FileInputStream;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class FileServlet extends HttpServlet{
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response){
+		String fileName = request.getParameter("filename");
+		FileInputStream file = new FileInputStream("tmp/" + fileName);
+		
+		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+		response.getOutputStream()
+	}
+	
+}

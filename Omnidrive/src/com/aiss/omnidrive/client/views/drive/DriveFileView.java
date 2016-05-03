@@ -55,6 +55,9 @@ public class DriveFileView extends Composite {
 					// TODO Auto-generated method stub
 					Map<String, String> fileParams = new HashMap<String, String>();
 					fileParams.put("parent", file.getId());
+					if (file.getParents().size() > 0) {
+						fileParams.put("directorioAnterior", file.getParents().get(0));
+					}
 					MainController.go("drive", fileParams);
 				}
 			});
@@ -67,7 +70,7 @@ public class DriveFileView extends Composite {
 				// TODO Auto-generated method stub
 				event.preventDefault();
 				event.stopPropagation();
-				new DriveFileContextualMenuView(event);
+				new DriveFileContextualMenuView(file, event);
 			}
 		}, ContextMenuEvent.getType());
 		

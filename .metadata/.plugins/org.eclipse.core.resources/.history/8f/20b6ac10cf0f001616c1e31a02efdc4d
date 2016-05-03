@@ -1,7 +1,0 @@
-package com.aiss.omnidrive.server.resources;
-
-public class DriveResource {
-	
-	private static final String USER_BASE_URL = "";
-
-}

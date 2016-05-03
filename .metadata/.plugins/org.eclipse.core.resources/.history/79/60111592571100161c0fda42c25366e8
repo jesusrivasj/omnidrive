@@ -1,0 +1,70 @@
+package com.aiss.omnidrive.server.resources;
+
+import org.restlet.data.ChallengeResponse;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.resource.ClientResource;
+
+import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
+import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
+
+
+public class DriveResource {
+	
+	private static final String BASE_URL = "https://www.googleapis.com/drive/v3";
+	private static final String TYPE_TOKEN = "Bearer";
+	
+	public static DriveUserInfo getUserInfo(String token){
+		DriveUserInfo userInfo;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		
+		connection = new ClientResource(BASE_URL + "/about");
+		connection.addQueryParameter("fields", "appInstalled,exportFormats,folderColorPalette,importFormats,kind,maxImportSizes,maxUploadSize,storageQuota,user");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2", TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+		
+		userInfo = connection.get(DriveUserInfo.class);
+		
+		return userInfo;
+	}
+	
+	public static DriveFilesList getFiles(String token, String parent){
+		DriveFilesList files;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		String q;
+		
+		q = "'" + parent + "' in parents and trashed = false";
+		connection = new ClientResource(BASE_URL + "/files");
+		connection.addQueryParameter("fields", "files,kind,nextPageToken");
+		connection.addQueryParameter("q", q);
+		connection.addQueryParameter("pageSize", "1000");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2", TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+		
+		files = connection.get(DriveFilesList.class);
+		
+		return files;
+	}
+	
+	public static DriveFilesList getFile(String token, String ifFile){
+		DriveFilesList files;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		String q;
+		
+		connection = new ClientResource(BASE_URL + "/files/" + idFile);
+		connection.addQueryParameter("fields", "appProperties%2Ccapabilities%2CcontentHints%2CcreatedTime%2Cdescription%2CexplicitlyTrashed%2CfileExtension%2CfolderColorRgb%2CfullFileExtension%2CheadRevisionId%2CiconLink%2Cid%2CimageMediaMetadata%2CisAppAuthorized%2Ckind%2ClastModifyingUser%2Cmd5Checksum%2CmimeType%2CmodifiedByMeTime%2CmodifiedTime%2Cname%2CoriginalFilename%2CownedByMe%2Cowners%2Cparents%2Cpermissions%2Cproperties%2CquotaBytesUsed%2Cshared%2CsharedWithMeTime%2CsharingUser%2Csize%2Cspaces%2Cstarred%2CthumbnailLink%2Ctrashed%2Cversion%2CvideoMediaMetadata%2CviewedByMe%2CviewedByMeTime%2CviewersCanCopyContent%2CwebContentLink%2CwebViewLink%2CwritersCanShare");
+		connection.addQueryParameter("q", q);
+		connection.addQueryParameter("pageSize", "1000");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2", TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+		
+		files = connection.get(DriveFilesList.class);
+		
+		return files;
+	}
+}

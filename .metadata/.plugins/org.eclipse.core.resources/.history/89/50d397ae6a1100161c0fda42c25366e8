@@ -1,0 +1,5 @@
+package com.aiss.omnidrive.server.servlets;
+
+public class FileServlet {
+
+}

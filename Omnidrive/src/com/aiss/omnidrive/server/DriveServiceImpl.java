@@ -1,7 +1,10 @@
 package com.aiss.omnidrive.server;
 
+import org.restlet.representation.FileRepresentation;
+
 import com.aiss.omnidrive.client.rpc.DriveService;
 import com.aiss.omnidrive.server.resources.DriveResource;
+import com.aiss.omnidrive.shared.drive.files.DriveFile;
 import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
 import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -22,5 +25,22 @@ public class DriveServiceImpl extends RemoteServiceServlet implements DriveServi
 		files = DriveResource.getFiles(token, parent);
 		
 		return files;
+	}
+	
+	public DriveFile getFile(String token, String idFile){
+		DriveFile file;
+		
+		file = DriveResource.getFile(token, idFile);
+		
+		return file;
+	}
+	
+	public String downloadFile(String token, String idFile){
+		//FileRepresentation file;
+		String file;
+		
+		file = DriveResource.downloadFile(token, idFile);
+		
+		return file;
 	}
 }

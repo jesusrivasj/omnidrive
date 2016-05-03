@@ -1,0 +1,45 @@
+package com.aiss.omnidrive.server;
+
+import java.io.File;
+
+import com.aiss.omnidrive.client.rpc.DriveService;
+import com.aiss.omnidrive.server.resources.DriveResource;
+import com.aiss.omnidrive.shared.drive.files.DriveFile;
+import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
+import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+public class DriveServiceImpl extends RemoteServiceServlet implements DriveService{
+	
+	public DriveUserInfo getUserInfo(String token){
+		DriveUserInfo userInfo;
+		
+		userInfo = DriveResource.getUserInfo(token);
+		
+		return userInfo;
+	}
+	
+	public DriveFilesList getFiles(String token, String parent){
+		DriveFilesList files;
+		
+		files = DriveResource.getFiles(token, parent);
+		
+		return files;
+	}
+	
+	public DriveFile getFile(String token, String idFile){
+		DriveFile file;
+		
+		file = DriveResource.getFile(token, idFile);
+		
+		return file;
+	}
+	
+	public File getFile(String token, String idFile){
+		File file;
+		
+		file = DriveResource.downloadFile(token, idFile);
+		
+		return file;
+	}
+}

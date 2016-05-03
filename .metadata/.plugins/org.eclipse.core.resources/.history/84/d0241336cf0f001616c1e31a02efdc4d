@@ -1,8 +1,0 @@
-package com.aiss.omnidrive.server.resources;
-
-public class DriveResource {
-	
-	private static final String USER_BASE_URL = "GET https://www.googleapis.com/drive/v3/about";
-	private static final String FILES_BASE_URL = "";
-
-}
