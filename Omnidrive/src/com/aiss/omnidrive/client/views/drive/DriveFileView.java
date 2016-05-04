@@ -35,19 +35,19 @@ public class DriveFileView extends Composite {
 		fileView = new HTML();
 		fileContent = new FlowPanel();
 		fileContent.addStyleName("fileContent");
-		icon = new Image(file.getIconLink());
-		icon.addStyleName("icon");
-		fileIcon = new HTML(icon.toString());
-		fileIcon.addStyleName("iconContent");
-		fileContent.add(fileIcon);
+		
 		fileText = new HTML(file.getName());
 		fileText.addStyleName("textContent");
 		fileContent.add(fileText);
-		
-		fileView.setHTML(fileContent.toString());
-		fileView.addStyleName("fileView");
-		
+				
 		if (file.isDirectory()) {
+			
+			icon = new Image(GWT.getHostPageBaseURL() + "/iconoDirectorio.png");
+			icon.addStyleName("icon");
+			fileIcon = new HTML(icon.toString());
+			fileIcon.addStyleName("iconContent");
+			fileContent.add(fileIcon);
+			
 			fileView.addDoubleClickHandler(new DoubleClickHandler() {
 				
 				@Override
@@ -55,12 +55,15 @@ public class DriveFileView extends Composite {
 					// TODO Auto-generated method stub
 					Map<String, String> fileParams = new HashMap<String, String>();
 					fileParams.put("parent", file.getId());
-					if (file.getParents().size() > 0) {
-						fileParams.put("directorioAnterior", file.getParents().get(0));
-					}
 					MainController.go("drive", fileParams);
 				}
 			});
+		} else {
+			icon = new Image(GWT.getHostPageBaseURL() + "/iconoArchivo.png");
+			icon.addStyleName("icon");
+			fileIcon = new HTML(icon.toString());
+			fileIcon.addStyleName("iconContent");
+			fileContent.add(fileIcon);
 		}
 		fileView.sinkEvents(Event.ONCONTEXTMENU);
 		fileView.addHandler(new ContextMenuHandler() {
@@ -73,6 +76,10 @@ public class DriveFileView extends Composite {
 				new DriveFileContextualMenuView(file, event);
 			}
 		}, ContextMenuEvent.getType());
+		
+
+		fileView.setHTML(fileContent.toString());
+		fileView.addStyleName("fileView");
 		
 		initWidget(fileView);
 	}

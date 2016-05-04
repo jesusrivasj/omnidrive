@@ -1,0 +1,24 @@
+package com.aiss.omnidrive.client.views;
+
+import com.aiss.omnidrive.client.controllers.DriveController;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Panel;
+
+public class DisconnectMenuView extends Composite {
+
+	
+	public DisconnectMenuView(){
+		final Panel disconnectMenu;
+		int connected = 0;
+		
+		disconnectMenu = new FlowPanel();
+		disconnectMenu.addStyleName("sidenavMenuContent");
+		
+		if (DriveController.isConnect()) {
+		HTML connectLink = new HTML("Conectar");
+		connectLink.addStyleName("menuOption");
+		}
+	}
+}

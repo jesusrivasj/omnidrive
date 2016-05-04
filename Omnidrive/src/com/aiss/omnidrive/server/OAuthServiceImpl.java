@@ -32,7 +32,7 @@ public class OAuthServiceImpl extends RemoteServiceServlet implements OAuthServi
 		if (service.equals("drive")){
 			token = OAuthResource.getDriveToken(code);
 		} else if (service.equals("onedrive")) {
-			
+			token = OAuthResource.getOnedriveToken(code);
 		} else if (service.equals("dropbox")) {
 			token = OAuthResource.getDropboxToken(code);
 		}
@@ -48,7 +48,7 @@ public class OAuthServiceImpl extends RemoteServiceServlet implements OAuthServi
 		if (service.equals("drive")){
 			token = OAuthResource.refreshDriveToken(refreshToken);
 		} else if (service.equals("onedrive")) {
-			
+			token = OAuthResource.refreshOnedriveToken(refreshToken);
 		}
 		
 		return token;

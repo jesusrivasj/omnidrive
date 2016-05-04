@@ -14,5 +14,9 @@ public class DropboxController {
 		
 		return connected;
 	}
+
+	public static void disconnect(){
+		Cookies.removeCookie("dropboxToken");
+	}
 	
 }

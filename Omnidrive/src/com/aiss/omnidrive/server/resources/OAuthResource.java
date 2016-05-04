@@ -21,11 +21,11 @@ public class OAuthResource {
 	
 	private static final String DRIVE_CLIENT_ID = "251525019809-bttumkqg26s43j01qmcqogrtesvv4cie.apps.googleusercontent.com";
 	private static final String DRIVE_CLIENT_SECRET = "Be6LpCB1RshhLyg7wXd8-p4A";
-	private static final String ONEDRIVE_CLIENT_ID = "";
-	private static final String ONEDRIVE_CLIENT_SECRET = "";
+	private static final String ONEDRIVE_CLIENT_ID = "0000000044187310";
+	private static final String ONEDRIVE_CLIENT_SECRET = "KPV0DOGCPUOb2zknQ92WqDvLCDrwdSdH";
 	private static final String DROPBOX_CLIENT_ID = "fun092l2e17f94b";
 	private static final String DROPBOX_CLIENT_SECRET = "nn0poenq238m1ut";
-	private static final String REDIRECT_URI = "http://127.0.0.1:8888/";
+	private static final String REDIRECT_URI = "http://localhost:8888/";
 	//private static final String REDIRECT_URI = "https://omni-drive.appspot.com/";
 	
 	public static String getDriveAuthUrl(){
@@ -53,16 +53,13 @@ public class OAuthResource {
 		String authUrl; 
 		Map<String, String> urlParams;
 		
-		authUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+		authUrl = "https://login.live.com/oauth20_authorize.srf";
 		urlParams = new HashMap<String, String>();
 		
 		urlParams.put("response_type", "code");
 		urlParams.put("client_id", OAuthResource.ONEDRIVE_CLIENT_ID);
-		urlParams.put("redirect_uri", "http://127.0.0.1:8888/");
-		urlParams.put("scope",  OAuthResource.REDIRECT_URI);
-		urlParams.put("access_type", "offline");
-		urlParams.put("prompt", "select_account");
-		urlParams.put("include_granted_scopes", "true");
+		urlParams.put("redirect_uri", OAuthResource.REDIRECT_URI);
+		urlParams.put("scope",  "wl.signin wl.offline_access onedrive.readwrite");
 		
 		authUrl += UrlUtils.parseParams(urlParams);
 		
@@ -106,9 +103,9 @@ public class OAuthResource {
 		OAuthToken token;
 		String authUrl, clientId, clientSecret, grantType, redirectUri;
 		
-		authUrl = "https://www.googleapis.com/oauth2/v4/token";
-		clientId = OAuthResource.DRIVE_CLIENT_ID;
-		clientSecret = OAuthResource.DRIVE_CLIENT_SECRET;
+		authUrl = "https://login.live.com/oauth20_token.srf";
+		clientId = OAuthResource.ONEDRIVE_CLIENT_ID;
+		clientSecret = OAuthResource.ONEDRIVE_CLIENT_SECRET;
 		grantType = "authorization_code";
 		redirectUri =  OAuthResource.REDIRECT_URI;
 		
@@ -185,7 +182,7 @@ public class OAuthResource {
 		OAuthToken token;
 		String authUrl, clientId, clientSecret, grantType, redirectUri;
 		
-		authUrl = "https://www.googleapis.com/oauth2/v4/token";
+		authUrl = "https://login.live.com/oauth20_token.srf";
 		clientId = OAuthResource.ONEDRIVE_CLIENT_ID;
 		clientSecret = OAuthResource.ONEDRIVE_CLIENT_SECRET;
 		grantType = "refresh_token";

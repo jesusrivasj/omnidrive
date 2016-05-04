@@ -1,9 +1,13 @@
 package com.aiss.omnidrive.client.views.drive;
 
+import java.util.Date;
+
+import com.aiss.omnidrive.client.controllers.DriveController;
 import com.aiss.omnidrive.client.rpc.DriveService;
 import com.aiss.omnidrive.client.rpc.DriveServiceAsync;
 import com.aiss.omnidrive.client.rpc.OAuthService;
 import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.aiss.omnidrive.shared.OAuthToken;
 import com.aiss.omnidrive.shared.drive.files.DriveFile;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -25,39 +29,59 @@ public class DriveFileContextualMenuView extends Composite {
 	
 	
 	public DriveFileContextualMenuView(final DriveFile file, ContextMenuEvent event){
+		int menuHeight = 200;
+		int menuWidth = 150;
 		int positionX, positionY;
 		PopupPanel menuContextual = new PopupPanel(true);
 		FlowPanel opcionesMenu = new FlowPanel();
-		HTML opcionDescarga;
+		HTML opcionDescarga, divider1;
 		
-		positionX = event.getNativeEvent().getClientX();
-		positionY = event.getNativeEvent().getClientY();
+		positionX = event.getNativeEvent().getClientX() + 15;
+		positionY = event.getNativeEvent().getClientY() + 5;
+		if ((positionX + menuWidth) >= Window.getClientWidth()) {
+			positionX -= menuWidth;
+		}
+		if ((positionY + menuHeight) >= Window.getClientHeight()) {
+			positionY -= menuHeight;
+		}
 		menuContextual.addStyleName("menuContextual");
 		menuContextual.setPopupPosition(positionX, positionY);
-		
+		if (!file.isDirectory()) {
 			opcionDescarga = new HTML("Descargar");
 			opcionDescarga.addClickHandler(new ClickHandler() {
 				
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-					driveService.downloadFile(Cookies.getCookie("driveAccessToken"), file.getId(), new AsyncCallback<String>() {
-						
-						@Override
-						public void onSuccess(String downloadFile) {
-							// TODO Auto-generated method stub
-							Window.open(file.getWebViewLink(), "", "");
-						}
-						
-						@Override
-						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
+					if (!DriveController.hasToken()) {
+						oauthService.refreshToken("drive", Cookies.getCookie("driveToken"), new AsyncCallback<OAuthToken>() {
+							@Override
+							public void onSuccess(OAuthToken token) {
+								// TODO Auto-generated method stub
+								if (token.isCorrect()){
+									Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
+									Cookies.setCookie("driveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
+								} else {
+									Cookies.removeCookie("driveToken");
+									Window.Location.replace(GWT.getHostPageBaseURL());
+								}
+							}
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
+					}
+					Window.open("https://www.googleapis.com/drive/v3/files/" + file.getId() + "?alt=media&access_token=" + Cookies.getCookie("driveAccessToken"), file.getName(), "");
 				}
 			});
+			opcionDescarga.addStyleName("opcionMenuContextual");
 			opcionesMenu.add(opcionDescarga);
+		}
+		divider1 = new HTML();
+		divider1.addStyleName("dividerMenuContextual");
+		opcionesMenu.add(divider1);
 		menuContextual.add(opcionesMenu);
 		menuContextual.show();
 	}

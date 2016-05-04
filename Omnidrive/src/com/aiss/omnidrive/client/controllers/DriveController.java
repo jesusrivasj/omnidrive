@@ -22,6 +22,10 @@ public class DriveController {
 		return connected;
 	}
 	
+	public static void disconnect(){
+		Cookies.removeCookie("driveToken");
+		Cookies.removeCookie("driveAccessToken");
+	}
 	
 	public static Boolean hasToken(){
 		Boolean hasToken;

@@ -14,8 +14,6 @@ import com.aiss.omnidrive.shared.OAuthToken;
 import com.aiss.omnidrive.shared.drive.files.DriveFile;
 import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.user.client.Cookies;
@@ -38,7 +36,8 @@ public class DriveFilesListView extends Composite {
 	public DriveFilesListView(final Map<String, String> params){
 		final Panel content, infoBar;
 		final String parent;
-		final HTML directorioAnterior;
+		final DriveFile parentFile;
+		final Panel directorioAnterior;
 		if (DriveController.isConnect()) {
 			content = new FlowPanel();
 			if (!DriveController.hasToken()) {
@@ -65,22 +64,39 @@ public class DriveFilesListView extends Composite {
 				parent = params.get("parent");
 			} else {
 				parent = "root";
-				params.put("directorioAnterior", "root");
 			}
 			infoBar = new FlowPanel();
 			infoBar.addStyleName("infobar");
-			directorioAnterior = new HTML(params.get("directorioAnterior"));
-			directorioAnterior.addDoubleClickHandler(new DoubleClickHandler() {
-				
+			driveService.getFile(Cookies.getCookie("driveAccessToken"), parent, new AsyncCallback<DriveFile>() {
 				@Override
-				public void onDoubleClick(DoubleClickEvent event) {
+				public void onSuccess(final DriveFile file) {
 					// TODO Auto-generated method stub
-					params.put("parent", params.get("directorioAnterior"));
-					MainController.go("drive", params);
+					if (file.getParents().size() > 0) {
+						HTML botonVolver = new HTML("<");
+						botonVolver.addDoubleClickHandler(new DoubleClickHandler() {
+							
+							@Override
+							public void onDoubleClick(DoubleClickEvent event) {
+								// TODO Auto-generated method stub
+								params.put("parent", file.getParents().get(0));
+								MainController.go("drive", params);
+							}
+						});
+						infoBar.add(botonVolver);
+						infoBar.add(new HTML(file.getName()));
+					} else {
+						infoBar.add(new HTML("Mis archivos"));
+					}
+					//infoBar.add(directorioAnterior);
+					content.add(infoBar);
+				}
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
 				}
 			});
-			infoBar.add(directorioAnterior);
-			content.add(infoBar);
+				
 			driveService.getFiles(Cookies.getCookie("driveAccessToken"), parent, new AsyncCallback<DriveFilesList>() {
 				
 				@Override
