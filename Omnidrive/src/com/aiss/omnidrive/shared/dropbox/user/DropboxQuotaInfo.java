@@ -27,13 +27,14 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class DropboxQuotaInfo implements Serializable {
 
     @JsonProperty("shared")
-    private String shared;
+    private Long shared;
     @JsonProperty("quota")
-    private String quota;
+    private Long quota;
     @JsonProperty("normal")
-    private String normal;
+    private Long normal;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    
 
     /**
      * 
@@ -41,9 +42,10 @@ public class DropboxQuotaInfo implements Serializable {
      *     The shared
      */
     @JsonProperty("shared")
-    public String getShared() {
+    public Long getShared() {
         return shared;
     }
+    
 
     /**
      * 
@@ -51,10 +53,10 @@ public class DropboxQuotaInfo implements Serializable {
      *     The shared
      */
     @JsonProperty("shared")
-    @JsonDeserialize(contentAs=String.class)
-    public void setShared(String shared) {
+    public void setShared(Long shared) {
         this.shared = shared;
     }
+    
 
     /**
      * 
@@ -62,10 +64,10 @@ public class DropboxQuotaInfo implements Serializable {
      *     The quota
      */
     @JsonProperty("quota")
-    @JsonDeserialize(contentAs=String.class)
-    public String getQuota() {
+    public Long getQuota() {
         return quota;
     }
+    
 
     /**
      * 
@@ -73,10 +75,11 @@ public class DropboxQuotaInfo implements Serializable {
      *     The quota
      */
     @JsonProperty("quota")
-    @JsonDeserialize(contentAs=String.class)
-    public void setQuota(String quota) {
+    public void setQuota(Long quota) {
         this.quota = quota;
     }
+    
+
 
     /**
      * 
@@ -84,9 +87,10 @@ public class DropboxQuotaInfo implements Serializable {
      *     The normal
      */
     @JsonProperty("normal")
-    public String getNormal() {
+    public Long getNormal() {
         return normal;
     }
+    
 
     /**
      * 
@@ -94,15 +98,20 @@ public class DropboxQuotaInfo implements Serializable {
      *     The normal
      */
     @JsonProperty("normal")
-    public void setNormal(String normal) {
+    public void setNormal(Long normal) {
         this.normal = normal;
     }
+    
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
+    public void clearAdditionalProperties(){
+    	this.additionalProperties.clear();
+    }
+    
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);

@@ -10,7 +10,13 @@ public class DropboxServiceImpl extends RemoteServiceServlet implements DropboxS
 	public DropboxUserInfo getUserInfo(String token){
 		DropboxUserInfo userInfo;
 		
+		
+		//userInfo = new DropboxUserInfo();
 		userInfo = DropboxResource.getUserInfo(token);
+		userInfo.clearAdditionalProperties();
+		userInfo.getQuotaInfo().clearAdditionalProperties();
+		/*System.out.println(userInfo.getQuotaInfo().getQuota());
+		userInfo = new DropboxUserInfo();*/
 		
 		return userInfo;
 	}

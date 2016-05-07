@@ -35,7 +35,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class DropboxUserInfo implements Serializable {
 
     @JsonProperty("uid")
-    private String uid;
+    private Long uid;
     @JsonProperty("display_name")
     private String displayName;
     @JsonProperty("name_details")
@@ -58,28 +58,27 @@ public class DropboxUserInfo implements Serializable {
     private DropboxQuotaInfo quotaInfo;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
+    
     /**
      * 
      * @return
      *     The uid
      */
     @JsonProperty("uid")
-    public String getUid() {
+    public Long getUid() {
         return uid;
     }
-
+    
     /**
      * 
      * @param uid
      *     The uid
      */
     @JsonProperty("uid")
-    @JsonDeserialize(contentAs=String.class)
-    public void setUid(String uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
-
+    
     /**
      * 
      * @return
@@ -283,6 +282,10 @@ public class DropboxUserInfo implements Serializable {
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
+    }
+    
+    public void clearAdditionalProperties(){
+    	this.additionalProperties.clear();
     }
 
     @JsonAnySetter

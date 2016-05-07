@@ -58,4 +58,6 @@
 <fullyQualifiedTypeName name="com.google.gwt.user.client.rpc.AsyncCallback"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Composite"/>
 <fullyQualifiedTypeName name="com.aiss.omnidrive.client.controllers.MainController"/>
+<fullyQualifiedTypeName name="com.aiss.omnidrive.shared.dropbox.user.DropboxUserInfo"/>
+<fullyQualifiedTypeName name="org.restlet.data.Method"/>
 </qualifiedTypeNameHistroy>

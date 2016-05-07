@@ -18,7 +18,6 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -82,9 +81,8 @@ public class DropboxMenuView extends Composite {
 					@Override
 					public void onSuccess(DropboxUserInfo userInfo) {
 						// TODO Auto-generated method stub
-						String useUser;
-						useUser = userInfo.getDisplayName();
-						Window.alert(useUser);
+						String useUser = "";
+						Window.alert("" + userInfo.getQuotaInfo().getQuota());
 						info.setText(useUser);
 					}
 					@Override

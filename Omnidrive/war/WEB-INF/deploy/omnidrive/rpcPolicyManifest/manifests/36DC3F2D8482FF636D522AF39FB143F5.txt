@@ -1,0 +1,2 @@
+serviceClass: com.aiss.omnidrive.client.rpc.DriveService
+path: B23004CBE37226F49DDE4F6481B2846A.gwt.rpc

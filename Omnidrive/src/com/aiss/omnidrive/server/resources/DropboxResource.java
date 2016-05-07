@@ -2,6 +2,8 @@ package com.aiss.omnidrive.server.resources;
 
 import org.restlet.data.ChallengeResponse;
 import org.restlet.data.ChallengeScheme;
+import org.restlet.data.Method;
+import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 import com.aiss.omnidrive.shared.dropbox.user.DropboxUserInfo;
@@ -12,16 +14,19 @@ public class DropboxResource {
 	private static final String TYPE_TOKEN = "Bearer";
 	
 	public static DropboxUserInfo getUserInfo(String token){
-		DropboxUserInfo userInfo;
+		DropboxUserInfo userInfo, userInfo2;
 		ClientResource connection;
 		ChallengeResponse authorization;
 		
 		connection = new ClientResource(BASE_URL + "/account/info");
+		connection.setMethod(Method.POST);
 		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2", TYPE_TOKEN));
 		authorization.setRawValue(token);
 		connection.setChallengeResponse(authorization);
 		
 		userInfo = connection.get(DropboxUserInfo.class);
+		/*System.out.println(userInfo2.getQuotaInfo().getNormal());
+		userInfo = new DropboxUserInfo();*/
 		
 		return userInfo;
 	}

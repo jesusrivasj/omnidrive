@@ -2,15 +2,16 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="," key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Integer"/>
+			<item value="Intege"/>
 			<item value="%2C"/>
 			<item value="public static DriveUserInfo getUserInfo(String token){"/>
-			<item value="Integer"/>
 			<item value="se"/>
 		</list>
 		<list key="replacehistory">
