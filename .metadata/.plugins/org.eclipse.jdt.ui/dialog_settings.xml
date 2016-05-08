@@ -10,6 +10,7 @@
 		<item value="400" key="height"/>
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="false" key="renameSubpackages"/>
 		<item value="false" key="updateQualifiedNames"/>
 		<item value="*" key="patterns"/>
 		<item value="false" key="updateSimilarElements"/>
@@ -53,6 +54,8 @@
 		</section>
 	</section>
 	<section name="completion_proposal_size">
+		<item value="255" key="size.y"/>
+		<item value="355" key="size.x"/>
 		<item value="221" key="contextSelector.size.y"/>
 		<item value="331" key="contextSelector.size.x"/>
 	</section>

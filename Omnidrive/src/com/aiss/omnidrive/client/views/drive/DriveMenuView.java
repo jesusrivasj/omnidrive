@@ -117,7 +117,7 @@ public class DriveMenuView extends Composite {
 						// TODO Auto-generated method stub
 						String spaceUsedUser;
 						spaceUsedUser = userInfo.getStorageQuota().getUsageInGB()  + 
-								" de " + userInfo.getStorageQuota().getLimitInGB() + "GB" + 
+								" GB de " + userInfo.getStorageQuota().getLimitInGB() + "GB" + 
 								" usados (" + userInfo.getStorageQuota().getPercentUsage() + "%)";
 						info.setText(spaceUsedUser);
 					}
@@ -129,7 +129,7 @@ public class DriveMenuView extends Composite {
 				});
 				info.addStyleName("menuOptionDown");
 				driveMenu.add(misArchivos);
-				driveMenu.add(subirArchivo);
+				//driveMenu.add(subirArchivo);
 				driveMenu.add(info);
 			} else {
 				HTML connectLink = new HTML("Conectar");

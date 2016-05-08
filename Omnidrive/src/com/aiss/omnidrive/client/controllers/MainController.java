@@ -15,6 +15,10 @@ public class MainController {
 			IndexController.show(params);
 		} else if (action.equals("drive")) {
 			DriveController.show(params);
+		} else if (action.equals("dropbox")) {
+			DropboxController.show(params);;
+		} else if (action.equals("onedrive")) {
+			OnedriveController.show(params);;
 		}
 	}
 

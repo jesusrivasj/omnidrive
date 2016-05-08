@@ -1,0 +1,93 @@
+package com.aiss.omnidrive.server.resources;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.restlet.data.ChallengeResponse;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
+
+import com.aiss.omnidrive.shared.drive.files.DriveFile;
+import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
+import com.aiss.omnidrive.shared.onedrive.user.OnedriveUserInfo;
+
+public class OnedriveResource {
+
+	private static final String BASE_URL = "https://api.onedrive.com/v1.0";
+	private static final String TYPE_TOKEN = "Bearer";
+
+	public static OnedriveUserInfo getUserInfo(String token) {
+		OnedriveUserInfo userInfo;
+		ClientResource connection;
+		ChallengeResponse authorization;
+
+		connection = new ClientResource(BASE_URL + "/drive");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2", TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+
+		userInfo = connection.get(OnedriveUserInfo.class);
+
+		
+		return userInfo;
+	}
+
+	public static OnedriveFilesList getFiles(String token, String parent) {
+		OnedriveFilesList files;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		String q;
+
+		q = "'" + parent + "' in parents and trashed = false";
+		connection = new ClientResource(BASE_URL + "/files");
+		connection.addQueryParameter("fields", "files,kind,nextPageToken");
+		connection.addQueryParameter("q", q);
+		connection.addQueryParameter("pageSize", "1000");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2",
+				TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+
+		files = connection.get(DriveFilesList.class);
+
+		return files;
+	}
+
+	public static DriveFile getFile(String token, String idFile) {
+		DriveFile file;
+		ClientResource connection;
+		ChallengeResponse authorization;
+
+		connection = new ClientResource(BASE_URL + "/files/" + idFile);
+		connection.addQueryParameter("fields", "appProperties,capabilities,contentHints,createdTime,description,explicitlyTrashed,fileExtension,folderColorRgb,fullFileExtension,headRevisionId,iconLink,id,imageMediaMetadata,isAppAuthorized,kind,lastModifyingUser,md5Checksum,mimeType,modifiedByMeTime,modifiedTime,name,originalFilename,ownedByMe,owners,parents,permissions,properties,quotaBytesUsed,shared,sharedWithMeTime,sharingUser,size,spaces,starred,thumbnailLink,trashed,version,videoMediaMetadata,viewedByMe,viewedByMeTime,viewersCanCopyContent,webContentLink,webViewLink,writersCanShare");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2",TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+
+		file = connection.get(DriveFile.class);
+
+		return file;
+	}
+	
+	public static String downloadFile(String token, String idFile) {
+		File file;
+		Representation downloadContent;
+		String content = "";
+		ClientResource connection;
+		ChallengeResponse authorization;
+		String q;
+
+		connection = new ClientResource(BASE_URL + "/files/" + idFile + "?alt=media");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2",TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+		try {
+		downloadContent = connection.get();
+		content = downloadContent.getText();
+		} catch (IOException e) {
+			
+		}
+		return content;
+	}
+}

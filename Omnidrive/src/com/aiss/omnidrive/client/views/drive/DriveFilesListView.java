@@ -14,11 +14,12 @@ import com.aiss.omnidrive.shared.OAuthToken;
 import com.aiss.omnidrive.shared.drive.files.DriveFile;
 import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.DoubleClickEvent;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -72,11 +73,12 @@ public class DriveFilesListView extends Composite {
 				public void onSuccess(final DriveFile file) {
 					// TODO Auto-generated method stub
 					if (file.getParents().size() > 0) {
-						HTML botonVolver = new HTML("<");
-						botonVolver.addDoubleClickHandler(new DoubleClickHandler() {
+						Anchor botonVolver = new Anchor("<");
+						botonVolver.removeStyleName("gwt-Anchor");
+						botonVolver.addClickHandler(new ClickHandler() {
 							
 							@Override
-							public void onDoubleClick(DoubleClickEvent event) {
+							public void onClick(ClickEvent event) {
 								// TODO Auto-generated method stub
 								params.put("parent", file.getParents().get(0));
 								MainController.go("drive", params);

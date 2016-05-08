@@ -1,0 +1,2 @@
+serviceClass: com.aiss.omnidrive.client.rpc.OnedriveService
+path: AC7F62D68A1F2135B41991653D349236.gwt.rpc

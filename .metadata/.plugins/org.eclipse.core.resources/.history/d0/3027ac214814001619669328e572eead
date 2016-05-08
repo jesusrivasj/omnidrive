@@ -1,0 +1,54 @@
+package com.aiss.omnidrive.server.resources;
+
+import org.restlet.data.ChallengeResponse;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.data.Method;
+import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
+
+import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
+import com.aiss.omnidrive.shared.dropbox.files.DropboxFilesList;
+import com.aiss.omnidrive.shared.dropbox.user.DropboxUserInfo;
+
+public class DropboxResource {
+	
+	private static final String BASE_URL = "https://api.dropboxapi.com/2";
+	private static final String TYPE_TOKEN = "Bearer";
+	
+	public static DropboxUserInfo getUserInfo(String token){
+		DropboxUserInfo userInfo, userInfo2;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		
+		connection = new ClientResource(BASE_URL + "/users/get_current_account");
+		connection.setMethod(Method.POST);
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2", TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+		
+		userInfo = connection.get(DropboxUserInfo.class);
+		
+		return userInfo;
+	}
+	
+	public static DropboxFilesList getFiles(String token, String parent) {
+		DropboxFilesList files;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		String jsonData;
+		Representation data;
+
+		jsonData = "\"path\":\"" + parent + "\"";
+		data = new JsonRepresentation(jsonData);
+		connection = new ClientResource(BASE_URL + "/files/list_folder");
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2",
+				TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+
+		files = connection.post(data, DropboxFilesList.class);
+
+		return files;
+	}
+}

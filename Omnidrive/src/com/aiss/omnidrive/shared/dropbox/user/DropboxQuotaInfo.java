@@ -116,5 +116,35 @@ public class DropboxQuotaInfo implements Serializable {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+    
+    public Double getQuotaInGB(){
+    	Double quotaGB;
+    	Double quota;
+    	
+    	quota = new Double(this.getQuota());
+    	quotaGB = (quota / 1024 / 1024 / 1024 ) * 100;
+    	
+    	return Math.round(quotaGB) / 100.0;
+    }
+    
+    public Double getUsageInGB(){
+    	Double usageGB;
+    	Double usage;
+    	
+    	usage = new Double(this.getNormal());
+    	usageGB = (usage / 1024 / 1024 / 1024 ) * 100;
+    	
+    	return Math.round(usageGB) / 100.0;
+    }
+    
+    public Double getPercentUsage(){
+    	Double limit, usage, percent;
+    	
+    	limit = new Double(this.getQuotaInGB());
+    	usage = new Double(this.getUsageInGB());
+    	percent = (usage / limit) * 10000;
+    	
+    	return Math.round(percent) / 100.0;
+    }
 
 }

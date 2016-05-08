@@ -46,14 +46,7 @@ public class IndexController {
 		if (IndexController.isAuthRedirect()) {
 			Window.Location.replace(IndexController.getAuthUrl());
 		} 
-		
-		if (!History.getToken().isEmpty()) {
-			if (History.getToken().equals("driveConnect")) {
-				params.put("option", "connect");
-				MainController.go("drive", params);
-			}
-		}
-		
+				
 		navbar.clear();
 		container.clear();
 		navbar.add(new NavbarView(params));
@@ -87,7 +80,7 @@ public class IndexController {
 		isAuthRedirect = false;
 		urlParameters = Window.Location.getParameterMap();
 		
-		if (urlParameters.containsKey("code") || urlParameters.containsKey("error")) {
+		if (urlParameters.containsKey("code")) {
 			isAuthRedirect = true;
 		}
 		

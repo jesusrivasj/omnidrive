@@ -1,0 +1,18 @@
+package com.aiss.omnidrive.client.rpc;
+
+import org.restlet.representation.FileRepresentation;
+
+import com.aiss.omnidrive.shared.drive.files.DriveFile;
+import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
+import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+@RemoteServiceRelativePath("onedrive")
+public interface OnedriveService extends RemoteService {
+	
+	DriveUserInfo getUserInfo(String token);
+	DriveFilesList getFiles(String token, String parent);
+	DriveFile getFile(String token, String idFile);	
+	String downloadFile(String token, String idFile);
+}

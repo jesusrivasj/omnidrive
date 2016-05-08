@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.aiss.omnidrive.client.controllers.DropboxController;
+import com.aiss.omnidrive.client.controllers.MainController;
 import com.aiss.omnidrive.client.rpc.DropboxService;
 import com.aiss.omnidrive.client.rpc.DropboxServiceAsync;
 import com.aiss.omnidrive.client.rpc.OAuthService;
@@ -65,10 +66,20 @@ public class DropboxMenuView extends Composite {
 		} else {
 			if (DropboxController.isConnect()) {
 				HTML misArchivos = new HTML("Mis archivos");
+				HTML subirArchivo = new HTML("Subir archivo");
 				final HTML info;
 				
 				misArchivos.addStyleName("menuOption");
 				misArchivos.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						MainController.go("dropbox");
+					}
+				});
+				subirArchivo.addStyleName("menuOption");
+				subirArchivo.addClickHandler(new ClickHandler() {
 					
 					@Override
 					public void onClick(ClickEvent event) {
@@ -81,9 +92,11 @@ public class DropboxMenuView extends Composite {
 					@Override
 					public void onSuccess(DropboxUserInfo userInfo) {
 						// TODO Auto-generated method stub
-						String useUser = "";
-						Window.alert("" + userInfo.getQuotaInfo().getQuota());
-						info.setText(useUser);
+						String spaceUsedUser;
+						spaceUsedUser = userInfo.getQuotaInfo().getUsageInGB()  + 
+								" GB de " + userInfo.getQuotaInfo().getQuotaInGB() + "GB" + 
+								" usados (" + userInfo.getQuotaInfo().getPercentUsage() + "%)";
+						info.setText(spaceUsedUser);
 					}
 					@Override
 					public void onFailure(Throwable caught) {
@@ -93,6 +106,7 @@ public class DropboxMenuView extends Composite {
 				});
 				info.addStyleName("menuOptionDown");
 				dropboxMenu.add(misArchivos);
+				//dropboxMenu.add(subirArchivo);
 				dropboxMenu.add(info);
 			} else {
 				HTML connectLink = new HTML("Conectar");

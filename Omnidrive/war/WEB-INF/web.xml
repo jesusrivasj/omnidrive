@@ -28,6 +28,16 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>onedriveServlet</servlet-name>
+    <servlet-class>com.aiss.omnidrive.server.OnedriveServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>onedriveServlet</servlet-name>
+    <url-pattern>/omnidrive/onedrive</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>dropboxServlet</servlet-name>
     <servlet-class>com.aiss.omnidrive.server.DropboxServiceImpl</servlet-class>
   </servlet>

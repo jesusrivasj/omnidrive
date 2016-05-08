@@ -1,0 +1,164 @@
+package com.aiss.omnidrive.client.views.onedrive;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.aiss.omnidrive.client.controllers.DriveController;
+import com.aiss.omnidrive.client.controllers.MainController;
+import com.aiss.omnidrive.client.controllers.OnedriveController;
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.aiss.omnidrive.client.rpc.OnedriveService;
+import com.aiss.omnidrive.client.rpc.OnedriveServiceAsync;
+import com.aiss.omnidrive.shared.OAuthToken;
+import com.aiss.omnidrive.shared.onedrive.user.OnedriveUserInfo;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Panel;
+
+public class OnedriveMenuView extends Composite {
+	
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final OnedriveServiceAsync onedriveService = GWT.create(OnedriveService.class);
+	
+	public OnedriveMenuView(){
+		new OnedriveMenuView(new HashMap<String, String>());
+	}
+	
+	public OnedriveMenuView(Map<String, String> params){
+		final Panel onedriveMenu;
+		
+		onedriveMenu = new FlowPanel();
+		onedriveMenu.addStyleName("sidenavMenuContent");
+		
+		if (!History.getToken().isEmpty()) {
+			if (History.getToken().equals("onedriveConnect")) {
+				String code = Window.Location.getParameterMap().get("authCode").get(0);
+				oauthService.getToken("onedrive", code, new AsyncCallback<OAuthToken>() {
+
+					@Override
+					public void onSuccess(OAuthToken token) {
+						if (token.isCorrect()) {
+							Date tokenExpireIn = new Date(new Date().getTime() + (10 * 24 * 60 * 60 * 1000));
+							Cookies.setCookie("onedriveToken", token.getRefreshToken(), tokenExpireIn);
+							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
+							Cookies.setCookie("onedriveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
+							Window.Location.replace(GWT.getHostPageBaseURL());
+						} else {
+						}
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+				});
+			}
+		} else {
+			if (OnedriveController.isConnect()) {
+				if (!DriveController.hasToken()) {
+					oauthService.refreshToken("onedrive", Cookies.getCookie("onedriveToken"), new AsyncCallback<OAuthToken>() {
+					@Override
+					public void onSuccess(OAuthToken token) {
+						// TODO Auto-generated method stub
+						if (token.isCorrect()){
+							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
+							Cookies.setCookie("onedriveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
+						} else {
+							Cookies.removeCookie("onedriveToken");
+							Window.Location.replace(GWT.getHostPageBaseURL());
+						}
+					}
+					@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+				}
+				HTML misArchivos = new HTML("Mis archivos");
+				HTML subirArchivo = new HTML("Subir archivo");
+				final HTML info;
+				
+				misArchivos.addStyleName("menuOption");
+				misArchivos.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						MainController.go("onedrive");
+					}
+				});
+				subirArchivo.addStyleName("menuOption");
+				subirArchivo.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						
+					}
+				});*/
+				info = new HTML();
+				onedriveService.getUserInfo(Cookies.getCookie("onedriveAccessToken"), new AsyncCallback<OnedriveUserInfo>() {
+					@Override
+					public void onSuccess(OnedriveUserInfo userInfo) {
+						// TODO Auto-generated method stub
+						String spaceUsedUser;
+						spaceUsedUser = userInfo.getQuota().getUsageInGB()  + 
+								" GB de " + userInfo.getQuota().getTotalInGB() + " GB" + 
+								" usados (" + userInfo.getQuota().getPercentUsage() + "%)";
+						info.setText(spaceUsedUser);
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+					}
+				});
+				info.addStyleName("menuOptionDown");
+				onedriveMenu.add(misArchivos);
+				//driveMenu.add(subirArchivo);
+				onedriveMenu.add(info);
+			} else {
+				HTML connectLink = new HTML("Conectar");
+				connectLink.addStyleName("menuOption");
+				connectLink.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						oauthService.getAuthUrl("onedrive", new AsyncCallback<String>() {
+							
+							@Override
+							public void onSuccess(String authUrl) {
+								// TODO Auto-generated method stub
+								Window.Location.replace(authUrl);
+							}
+							
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								Window.alert(caught.getMessage());
+							}
+						});
+					}
+				});
+				onedriveMenu.add(connectLink);
+			}
+		}
+		
+		initWidget(onedriveMenu);
+		
+	}
+	
+}

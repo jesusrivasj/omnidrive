@@ -1,0 +1,81 @@
+package com.aiss.omnidrive.client.views.dropbox;
+
+import java.util.Map;
+
+import com.aiss.omnidrive.client.controllers.DropboxController;
+import com.aiss.omnidrive.client.rpc.DropboxService;
+import com.aiss.omnidrive.client.rpc.DropboxServiceAsync;
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.aiss.omnidrive.shared.drive.files.DriveFile;
+import com.aiss.omnidrive.shared.dropbox.files.DropboxFile;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Panel;
+
+public class DropboxFileDetailsView extends Composite {
+	
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final DropboxServiceAsync dropboxService = GWT.create(DropboxService.class);
+	
+	public DropboxFileDetailsView(Map<String, String> params){
+		
+		if (DropboxController.isConnect()) {
+			final Panel detailsContent;
+			detailsContent = new FlowPanel();
+			dropboxService.getFile(Cookies.getCookie("dropboxToken"), params.get("path"), new AsyncCallback<DropboxFile>() {
+				@Override
+				public void onSuccess(DropboxFile file) {
+					// TODO Auto-generated method stub
+					final Anchor iconClose;
+					detailsContent.addStyleName("contenedorDetallesArchivo");
+					iconClose = new Anchor("X");
+					iconClose.removeStyleName("gwt-Anchor");
+					iconClose.addStyleName("iconoCierre");
+					detailsContent.add(iconClose);
+					iconClose.addClickHandler(new ClickHandler() {
+						
+						@Override
+						public void onClick(ClickEvent event) {
+							// TODO Auto-generated method stub
+							detailsContent.setVisible(false);
+						}
+					});
+					
+					HTML fileName = new HTML(file.getName());
+					fileName.addStyleName("tituloDetallesArchivo");
+					HTML fileType = new HTML();
+					fileType.addStyleName("detallesArchivo");
+					if (file.isDirectory()) {
+						fileType.setText("Tipo: Carpeta");
+					} else {
+						fileType.setText("Tipo: Archivo");
+					}
+					detailsContent.add(fileName);
+					detailsContent.add(fileType);
+					HTML fileModifiedDate = new HTML("Modificado el: " + file.getServerModified());
+					fileModifiedDate.addStyleName("detallesArchivo");
+					detailsContent.add(fileModifiedDate);
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
+
+			initWidget(detailsContent);
+		}
+		
+	}
+
+}

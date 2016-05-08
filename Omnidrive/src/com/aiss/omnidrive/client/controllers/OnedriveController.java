@@ -2,8 +2,13 @@ package com.aiss.omnidrive.client.controllers;
 
 import java.util.Map;
 
-import com.aiss.omnidrive.client.views.drive.DriveFilesListView;
+import com.aiss.omnidrive.client.views.onedrive.OnedriveContextualMenuView;
+import com.aiss.omnidrive.client.views.onedrive.OnedriveFileDetailsView;
+import com.aiss.omnidrive.client.views.onedrive.OnedriveFilesListView;
+import com.google.gwt.event.dom.client.ContextMenuEvent;
+import com.google.gwt.event.dom.client.ContextMenuHandler;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -47,13 +52,36 @@ public class OnedriveController {
 		
 		if (option.equals("showFiles")) {
 			OnedriveController.showFiles(params);
-		} 
+		} else if (option.equals("showFileDetails")){
+			OnedriveController.showFileDetails(params);
+		}
 	}
 	
-	public static void showFiles(Map<String, String> params){
+	public static void showFiles(final Map<String, String> params){
 		Panel container = RootPanel.get("container");
-		DriveFilesListView filesView = new DriveFilesListView(params);
+		OnedriveFilesListView filesView = new OnedriveFilesListView(params);
 		container.clear();
+		container.sinkEvents(Event.ONCONTEXTMENU);
+		container.addHandler(new ContextMenuHandler() {
+			
+			@Override
+			public void onContextMenu(ContextMenuEvent event) {
+				// TODO Auto-generated method stub
+				event.preventDefault();
+				event.stopPropagation();
+				String idFile = "root";
+				if (params.containsKey("parent")) {
+					idFile = params.get("parent");
+				}
+				new OnedriveContextualMenuView(idFile, event);
+			}
+		}, ContextMenuEvent.getType());
 		container.add(filesView);
+	}
+	
+	public static void showFileDetails(final Map<String, String> params){
+		Panel container = RootPanel.get("container");
+		OnedriveFileDetailsView fileDetails = new OnedriveFileDetailsView(params);
+		container.add(fileDetails);
 	}
 }

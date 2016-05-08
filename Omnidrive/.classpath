@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.codehaus.jackson.core.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.codehaus.jackson.mapper.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.restlet.ext.net.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/org.json.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

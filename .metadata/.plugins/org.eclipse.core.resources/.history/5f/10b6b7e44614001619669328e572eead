@@ -1,0 +1,121 @@
+package com.aiss.omnidrive.client.views.dropbox;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.aiss.omnidrive.client.controllers.DriveController;
+import com.aiss.omnidrive.client.controllers.MainController;
+import com.aiss.omnidrive.client.rpc.DropboxService;
+import com.aiss.omnidrive.client.rpc.DropboxServiceAsync;
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.aiss.omnidrive.shared.OAuthToken;
+import com.aiss.omnidrive.shared.drive.files.DriveFile;
+import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Panel;
+
+public class DropboxFilesListView extends Composite {
+
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final DropboxServiceAsync dropboxService = GWT.create(DropboxService.class);
+	
+	public DropboxFilesListView(){
+		new DropboxFilesListView(new HashMap<String, String>());
+	}
+	
+	public DropboxFilesListView(final Map<String, String> params){
+		final Panel content, infoBar;
+		final String parent;
+		final DriveFile parentFile;
+		final Panel directorioAnterior;
+		if (DriveController.isConnect()) {
+			content = new FlowPanel();
+			if (!DriveController.hasToken()) {
+				oauthService.refreshToken("drive", Cookies.getCookie("driveToken"), new AsyncCallback<OAuthToken>() {
+					@Override
+					public void onSuccess(OAuthToken token) {
+						// TODO Auto-generated method stub
+						if (token.isCorrect()){
+							Date tokenAccessExpireIn = new Date(new Date().getTime() + (token.getExpiresIn() * 1000));
+							Cookies.setCookie("driveAccessToken", token.getAccessToken(), tokenAccessExpireIn);
+						} else {
+							Cookies.removeCookie("driveToken");
+							Window.Location.replace(GWT.getHostPageBaseURL());
+						}
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+			}
+			if (params.containsKey("parent")) {
+				parent = params.get("parent");
+			} else {
+				parent = "";
+			}
+			infoBar = new FlowPanel();
+			infoBar.addStyleName("infobar");
+			/*dropboxService.getFile(Cookies.getCookie("driveAccessToken"), parent, new AsyncCallback<DriveFile>() {
+				@Override
+				public void onSuccess(final DriveFile file) {
+					// TODO Auto-generated method stub
+					if (file.getParents().size() > 0) {
+						HTML botonVolver = new HTML("<");
+						botonVolver.addDoubleClickHandler(new DoubleClickHandler() {
+							
+							@Override
+							public void onDoubleClick(DoubleClickEvent event) {
+								// TODO Auto-generated method stub
+								params.put("parent", file.getParents().get(0));
+								MainController.go("drive", params);
+							}
+						});
+						infoBar.add(botonVolver);
+						infoBar.add(new HTML(file.getName()));
+					} else {
+						infoBar.add(new HTML("Mis archivos"));
+					}
+					//infoBar.add(directorioAnterior);
+					content.add(infoBar);
+				}
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+			});*/
+				
+			dropboxService.getFiles(Cookies.getCookie("driveAccessToken"), parent, new AsyncCallback<DriveFilesList>() {
+				
+				@Override
+				public void onSuccess(DriveFilesList files) {
+					// TODO Auto-generated method stub
+					for(DriveFile file : files.getFiles()){
+						content.add(new DropboxFileView(params, file));
+					}
+				}
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			content.addStyleName("paddingContent");
+			initWidget(content);
+		} else {
+			Window.Location.replace(GWT.getHostPageBaseURL());
+		}
+	}
+}

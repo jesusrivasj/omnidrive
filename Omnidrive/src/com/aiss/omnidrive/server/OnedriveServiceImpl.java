@@ -2,33 +2,35 @@ package com.aiss.omnidrive.server;
 
 import com.aiss.omnidrive.client.rpc.OnedriveService;
 import com.aiss.omnidrive.server.resources.DriveResource;
-import com.aiss.omnidrive.shared.drive.files.DriveFile;
-import com.aiss.omnidrive.shared.drive.files.DriveFilesList;
-import com.aiss.omnidrive.shared.drive.user.DriveUserInfo;
+import com.aiss.omnidrive.server.resources.OnedriveResource;
+import com.aiss.omnidrive.shared.onedrive.files.OnedriveFile;
+import com.aiss.omnidrive.shared.onedrive.files.OnedriveFilesList;
+import com.aiss.omnidrive.shared.onedrive.user.OnedriveUserInfo;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class OnedriveServiceImpl extends RemoteServiceServlet implements OnedriveService{
 	
-	public DriveUserInfo getUserInfo(String token){
-		DriveUserInfo userInfo;
+	public OnedriveUserInfo getUserInfo(String token){
+		OnedriveUserInfo userInfo;
 		
-		userInfo = DriveResource.getUserInfo(token);
+		userInfo = OnedriveResource.getUserInfo(token);
+		userInfo.getQuota().clearAdditionalProperties();
 		
 		return userInfo;
 	}
 	
-	public DriveFilesList getFiles(String token, String parent){
-		DriveFilesList files;
+	public OnedriveFilesList getFiles(String token, String parent){
+		OnedriveFilesList files;
 		
-		files = DriveResource.getFiles(token, parent);
+		files = OnedriveResource.getFiles(token, parent);
 		
 		return files;
 	}
 	
-	public DriveFile getFile(String token, String idFile){
-		DriveFile file;
+	public OnedriveFile getFile(String token, String idFile){
+		OnedriveFile file;
 		
-		file = DriveResource.getFile(token, idFile);
+		file = OnedriveResource.getFile(token, idFile);
 		
 		return file;
 	}

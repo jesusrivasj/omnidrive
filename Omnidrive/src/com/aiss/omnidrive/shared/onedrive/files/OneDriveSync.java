@@ -1,0 +1,84 @@
+
+package com.aiss.omnidrive.shared.onedrive.files;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "@odata.type",
+    "id"
+})
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class OneDriveSync implements Serializable {
+
+    @JsonProperty("@odata.type")
+    private String OdataType;
+    @JsonProperty("id")
+    private String id;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The OdataType
+     */
+    @JsonProperty("@odata.type")
+    public String getOdataType() {
+        return OdataType;
+    }
+
+    /**
+     * 
+     * @param OdataType
+     *     The @odata.type
+     */
+    @JsonProperty("@odata.type")
+    public void setOdataType(String OdataType) {
+        this.OdataType = OdataType;
+    }
+
+    /**
+     * 
+     * @return
+     *     The id
+     */
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * 
+     * @param id
+     *     The id
+     */
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

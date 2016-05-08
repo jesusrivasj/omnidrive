@@ -2,8 +2,13 @@ package com.aiss.omnidrive.client.controllers;
 
 import java.util.Map;
 
+import com.aiss.omnidrive.client.views.drive.DriveContextualMenuView;
+import com.aiss.omnidrive.client.views.drive.DriveFileDetailsView;
 import com.aiss.omnidrive.client.views.drive.DriveFilesListView;
+import com.google.gwt.event.dom.client.ContextMenuEvent;
+import com.google.gwt.event.dom.client.ContextMenuHandler;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -46,13 +51,36 @@ public class DriveController {
 		
 		if (option.equals("showFiles")) {
 			DriveController.showFiles(params);
-		} 
+		} else if (option.equals("showFileDetails")) {
+			DriveController.showFileDetails(params);
+		}
 	}
 	
-	public static void showFiles(Map<String, String> params){
+	public static void showFiles(final Map<String, String> params){
 		Panel container = RootPanel.get("container");
 		DriveFilesListView filesView = new DriveFilesListView(params);
 		container.clear();
+		container.sinkEvents(Event.ONCONTEXTMENU);
+		container.addHandler(new ContextMenuHandler() {
+			
+			@Override
+			public void onContextMenu(ContextMenuEvent event) {
+				// TODO Auto-generated method stub
+				event.preventDefault();
+				event.stopPropagation();
+				String idFile = "root";
+				if (params.containsKey("parent")) {
+					idFile = params.get("parent");
+				}
+				new DriveContextualMenuView(idFile, event);
+			}
+		}, ContextMenuEvent.getType());
 		container.add(filesView);
+	}
+	
+	public static void showFileDetails(final Map<String, String> params){
+		Panel container = RootPanel.get("container");
+		DriveFileDetailsView fileDetails = new DriveFileDetailsView(params);
+		container.add(fileDetails);
 	}
 }

@@ -1,0 +1,252 @@
+
+package com.aiss.omnidrive.shared.dropbox.files;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Generated;
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    ".tag",
+    "name",
+    "path_lower",
+    "path_display",
+    "id",
+    "client_modified",
+    "server_modified",
+    "rev",
+    "size"
+})
+public class DropboxFile {
+
+    @JsonProperty(".tag")
+    private String Tag;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("path_lower")
+    private String pathLower;
+    @JsonProperty("path_display")
+    private String pathDisplay;
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("client_modified")
+    private String clientModified;
+    @JsonProperty("server_modified")
+    private String serverModified;
+    @JsonProperty("rev")
+    private String rev;
+    @JsonProperty("size")
+    private Long size;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The Tag
+     */
+    @JsonProperty(".tag")
+    public String getTag() {
+        return Tag;
+    }
+
+    /**
+     * 
+     * @param Tag
+     *     The .tag
+     */
+    @JsonProperty(".tag")
+    public void setTag(String Tag) {
+        this.Tag = Tag;
+    }
+
+    /**
+     * 
+     * @return
+     *     The name
+     */
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 
+     * @param name
+     *     The name
+     */
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 
+     * @return
+     *     The pathLower
+     */
+    @JsonProperty("path_lower")
+    public String getPathLower() {
+        return pathLower;
+    }
+
+    /**
+     * 
+     * @param pathLower
+     *     The path_lower
+     */
+    @JsonProperty("path_lower")
+    public void setPathLower(String pathLower) {
+        this.pathLower = pathLower;
+    }
+
+    /**
+     * 
+     * @return
+     *     The pathDisplay
+     */
+    @JsonProperty("path_display")
+    public String getPathDisplay() {
+        return pathDisplay;
+    }
+
+    /**
+     * 
+     * @param pathDisplay
+     *     The path_display
+     */
+    @JsonProperty("path_display")
+    public void setPathDisplay(String pathDisplay) {
+        this.pathDisplay = pathDisplay;
+    }
+
+    /**
+     * 
+     * @return
+     *     The id
+     */
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * 
+     * @param id
+     *     The id
+     */
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * 
+     * @return
+     *     The clientModified
+     */
+    @JsonProperty("client_modified")
+    public String getClientModified() {
+        return clientModified;
+    }
+
+    /**
+     * 
+     * @param clientModified
+     *     The client_modified
+     */
+    @JsonProperty("client_modified")
+    public void setClientModified(String clientModified) {
+        this.clientModified = clientModified;
+    }
+
+    /**
+     * 
+     * @return
+     *     The serverModified
+     */
+    @JsonProperty("server_modified")
+    public String getServerModified() {
+        return serverModified;
+    }
+
+    /**
+     * 
+     * @param serverModified
+     *     The server_modified
+     */
+    @JsonProperty("server_modified")
+    public void setServerModified(String serverModified) {
+        this.serverModified = serverModified;
+    }
+
+    /**
+     * 
+     * @return
+     *     The rev
+     */
+    @JsonProperty("rev")
+    public String getRev() {
+        return rev;
+    }
+
+    /**
+     * 
+     * @param rev
+     *     The rev
+     */
+    @JsonProperty("rev")
+    public void setRev(String rev) {
+        this.rev = rev;
+    }
+
+    /**
+     * 
+     * @return
+     *     The size
+     */
+    @JsonProperty("size")
+    public Long getSize() {
+        return size;
+    }
+
+    /**
+     * 
+     * @param size
+     *     The size
+     */
+    @JsonProperty("size")
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void clearAdditionalProperties(){
+    	this.additionalProperties.clear();
+    }
+    
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+    
+    public Boolean isDirectory(){
+    	Boolean isDirectory;
+    	
+    	isDirectory = (this.getTag().equals("folder"));
+    	
+    	return isDirectory;
+    }
+
+}

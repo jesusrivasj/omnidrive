@@ -2,4 +2,5 @@
 # RPC service class, partial path of RPC policy file
 com.aiss.omnidrive.client.rpc.OAuthService, EAF916B6A682D536C5BB78093546C726.gwt.rpc
 com.aiss.omnidrive.client.rpc.DriveService, B23004CBE37226F49DDE4F6481B2846A.gwt.rpc
-com.aiss.omnidrive.client.rpc.DropboxService, 8C2CEF8F672CDB1B8F370934273D041B.gwt.rpc
+com.aiss.omnidrive.client.rpc.OnedriveService, AC7F62D68A1F2135B41991653D349236.gwt.rpc
+com.aiss.omnidrive.client.rpc.DropboxService, F0FFE3DE9B2DA2369568942A224BA427.gwt.rpc

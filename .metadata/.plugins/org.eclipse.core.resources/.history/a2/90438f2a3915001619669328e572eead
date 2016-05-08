@@ -1,0 +1,83 @@
+package com.aiss.omnidrive.client.views.onedrive;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.aiss.omnidrive.client.controllers.MainController;
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.aiss.omnidrive.client.rpc.OnedriveService;
+import com.aiss.omnidrive.client.rpc.OnedriveServiceAsync;
+import com.aiss.omnidrive.shared.onedrive.files.OnedriveFile;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Panel;
+
+public class OnedriveFileView extends Composite {
+
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final OnedriveServiceAsync onedriveService = GWT.create(OnedriveService.class);
+	
+	public OnedriveFileView(Map<String, String> params, final OnedriveFile file){
+		HTML fileView, fileIcon, fileText;
+		Image icon;
+		Panel fileContent;
+			
+		fileView = new HTML();
+		fileContent = new FlowPanel();
+		fileContent.addStyleName("fileContent");
+		
+		fileText = new HTML(file.getName());
+		fileText.addStyleName("textContent");
+		fileContent.add(fileText);
+				
+		if (file.isDirectory()) {
+			
+			icon = new Image(GWT.getHostPageBaseURL() + "/iconoDirectorio.png");
+			icon.addStyleName("icon");
+			fileIcon = new HTML(icon.toString());
+			fileIcon.addStyleName("iconContent");
+			fileContent.add(fileIcon);
+			
+			fileView.addDoubleClickHandler(new DoubleClickHandler() {
+				
+				@Override
+				public void onDoubleClick(DoubleClickEvent event) {
+					// TODO Auto-generated method stub
+					Map<String, String> fileParams = new HashMap<String, String>();
+					fileParams.put("parent", file.getId());
+					MainController.go("onedrive", fileParams);
+				}
+			});
+		} else {
+			icon = new Image(GWT.getHostPageBaseURL() + "/iconoArchivo.png");
+			icon.addStyleName("icon");
+			fileIcon = new HTML(icon.toString());
+			fileIcon.addStyleName("iconContent");
+			fileContent.add(fileIcon);
+		}
+		/*fileView.sinkEvents(Event.ONCONTEXTMENU);
+		fileView.addHandler(new ContextMenuHandler() {
+			
+			@Override
+			public void onContextMenu(ContextMenuEvent event) {
+				// TODO Auto-generated method stub
+				event.preventDefault();
+				event.stopPropagation();
+				new DriveFileContextualMenuView(file, event);
+			}
+		}, ContextMenuEvent.getType());*/
+		
+
+		fileView.setHTML(fileContent.toString());
+		fileView.addStyleName("fileView");
+		
+		initWidget(fileView);
+	}
+	
+}

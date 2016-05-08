@@ -152,7 +152,7 @@ public class DriveStorageQuota implements Serializable{
     	
     	limit = new Double(this.getLimitInGB());
     	usage = new Double(this.getUsageInGB());
-    	percent = (usage / limit) * 100;
+    	percent = (usage / limit) * 10000;
     	
     	return Math.round(percent) / 100.0;
     }

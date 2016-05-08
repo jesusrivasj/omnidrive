@@ -1,0 +1,2 @@
+serviceClass: com.aiss.omnidrive.client.rpc.DropboxService
+path: F0FFE3DE9B2DA2369568942A224BA427.gwt.rpc

@@ -1,0 +1,104 @@
+package com.aiss.omnidrive.client.views.dropbox;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.aiss.omnidrive.client.controllers.DropboxController;
+import com.aiss.omnidrive.client.rpc.DropboxService;
+import com.aiss.omnidrive.client.rpc.DropboxServiceAsync;
+import com.aiss.omnidrive.client.rpc.OAuthService;
+import com.aiss.omnidrive.client.rpc.OAuthServiceAsync;
+import com.aiss.omnidrive.shared.drive.files.DriveFile;
+import com.aiss.omnidrive.shared.dropbox.files.DropboxFile;
+import com.aiss.omnidrive.shared.dropbox.files.DropboxFilesList;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Panel;
+
+public class DropboxFilesListView extends Composite {
+
+	private final OAuthServiceAsync oauthService = GWT.create(OAuthService.class);
+	private final DropboxServiceAsync dropboxService = GWT.create(DropboxService.class);
+	
+	public DropboxFilesListView(){
+		new DropboxFilesListView(new HashMap<String, String>());
+	}
+	
+	public DropboxFilesListView(final Map<String, String> params){
+		final Panel content, infoBar;
+		final String parent;
+		final DriveFile parentFile;
+		final Panel directorioAnterior;
+		final String[] pathParts;
+		if (DropboxController.isConnect()) {
+			content = new FlowPanel();
+			if (params.containsKey("parent")) {
+				parent = params.get("parent");
+			} else {
+				parent = "";
+			}
+			infoBar = new FlowPanel();
+			infoBar.addStyleName("infobar");
+			if (parent.isEmpty()) {
+				infoBar.add(new HTML("Mis archivos"));
+				content.add(infoBar);
+			} else {
+				
+			}
+			/*dropboxService.getFile(Cookies.getCookie("driveAccessToken"), parent, new AsyncCallback<DriveFile>() {
+				@Override
+				public void onSuccess(final DriveFile file) {
+					// TODO Auto-generated method stub
+					if (file.getParents().size() > 0) {
+						HTML botonVolver = new HTML("<");
+						botonVolver.addDoubleClickHandler(new DoubleClickHandler() {
+							
+							@Override
+							public void onDoubleClick(DoubleClickEvent event) {
+								// TODO Auto-generated method stub
+								params.put("parent", file.getParents().get(0));
+								MainController.go("drive", params);
+							}
+						});
+						infoBar.add(botonVolver);
+						infoBar.add(new HTML(file.getName()));
+					} else {
+						infoBar.add(new HTML("Mis archivos"));
+					}
+					//infoBar.add(directorioAnterior);
+					content.add(infoBar);
+				}
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+			});*/
+				
+			dropboxService.getFiles(Cookies.getCookie("dropboxToken"), parent, new AsyncCallback<DropboxFilesList>() {
+				
+				@Override
+				public void onSuccess(DropboxFilesList files) {
+					// TODO Auto-generated method stub
+					for(DropboxFile file : files.getEntries()){
+						content.add(new DropboxFileView(params, file));
+					}
+				}
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			content.addStyleName("paddingContent");
+			initWidget(content);
+		} else {
+			Window.Location.replace(GWT.getHostPageBaseURL());
+		}
+	}
+}

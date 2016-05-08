@@ -1,0 +1,217 @@
+
+package com.aiss.omnidrive.shared.onedrive.files;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Generated;
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "cameraMake",
+    "cameraModel",
+    "exposureDenominator",
+    "exposureNumerator",
+    "focalLength",
+    "fNumber",
+    "takenDateTime",
+    "iso"
+})
+public class OnedrivePhoto {
+
+    @JsonProperty("cameraMake")
+    private String cameraMake;
+    @JsonProperty("cameraModel")
+    private String cameraModel;
+    @JsonProperty("exposureDenominator")
+    private Long exposureDenominator;
+    @JsonProperty("exposureNumerator")
+    private Long exposureNumerator;
+    @JsonProperty("focalLength")
+    private Double focalLength;
+    @JsonProperty("fNumber")
+    private Double fNumber;
+    @JsonProperty("takenDateTime")
+    private String takenDateTime;
+    @JsonProperty("iso")
+    private Long iso;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The cameraMake
+     */
+    @JsonProperty("cameraMake")
+    public String getCameraMake() {
+        return cameraMake;
+    }
+
+    /**
+     * 
+     * @param cameraMake
+     *     The cameraMake
+     */
+    @JsonProperty("cameraMake")
+    public void setCameraMake(String cameraMake) {
+        this.cameraMake = cameraMake;
+    }
+
+    /**
+     * 
+     * @return
+     *     The cameraModel
+     */
+    @JsonProperty("cameraModel")
+    public String getCameraModel() {
+        return cameraModel;
+    }
+
+    /**
+     * 
+     * @param cameraModel
+     *     The cameraModel
+     */
+    @JsonProperty("cameraModel")
+    public void setCameraModel(String cameraModel) {
+        this.cameraModel = cameraModel;
+    }
+
+    /**
+     * 
+     * @return
+     *     The exposureDenominator
+     */
+    @JsonProperty("exposureDenominator")
+    public Long getExposureDenominator() {
+        return exposureDenominator;
+    }
+
+    /**
+     * 
+     * @param exposureDenominator
+     *     The exposureDenominator
+     */
+    @JsonProperty("exposureDenominator")
+    public void setExposureDenominator(Long exposureDenominator) {
+        this.exposureDenominator = exposureDenominator;
+    }
+
+    /**
+     * 
+     * @return
+     *     The exposureNumerator
+     */
+    @JsonProperty("exposureNumerator")
+    public Long getExposureNumerator() {
+        return exposureNumerator;
+    }
+
+    /**
+     * 
+     * @param exposureNumerator
+     *     The exposureNumerator
+     */
+    @JsonProperty("exposureNumerator")
+    public void setExposureNumerator(Long exposureNumerator) {
+        this.exposureNumerator = exposureNumerator;
+    }
+
+    /**
+     * 
+     * @return
+     *     The focalLength
+     */
+    @JsonProperty("focalLength")
+    public Double getFocalLength() {
+        return focalLength;
+    }
+
+    /**
+     * 
+     * @param focalLength
+     *     The focalLength
+     */
+    @JsonProperty("focalLength")
+    public void setFocalLength(Double focalLength) {
+        this.focalLength = focalLength;
+    }
+
+    /**
+     * 
+     * @return
+     *     The fNumber
+     */
+    @JsonProperty("fNumber")
+    public Double getFNumber() {
+        return fNumber;
+    }
+
+    /**
+     * 
+     * @param fNumber
+     *     The fNumber
+     */
+    @JsonProperty("fNumber")
+    public void setFNumber(Double fNumber) {
+        this.fNumber = fNumber;
+    }
+
+    /**
+     * 
+     * @return
+     *     The takenDateTime
+     */
+    @JsonProperty("takenDateTime")
+    public String getTakenDateTime() {
+        return takenDateTime;
+    }
+
+    /**
+     * 
+     * @param takenDateTime
+     *     The takenDateTime
+     */
+    @JsonProperty("takenDateTime")
+    public void setTakenDateTime(String takenDateTime) {
+        this.takenDateTime = takenDateTime;
+    }
+
+    /**
+     * 
+     * @return
+     *     The iso
+     */
+    @JsonProperty("iso")
+    public Long getIso() {
+        return iso;
+    }
+
+    /**
+     * 
+     * @param iso
+     *     The iso
+     */
+    @JsonProperty("iso")
+    public void setIso(Long iso) {
+        this.iso = iso;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}

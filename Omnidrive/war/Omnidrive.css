@@ -231,7 +231,8 @@ a.navbar-brand:hover {
 	z-index: 10;
 }
 
-.infobar > div {
+.infobar > div,
+.infobar > a {
 	display: inline-block;
 	margin: 1rem;
 	height: 2.8 rem;
@@ -243,6 +244,44 @@ a.navbar-brand:hover {
 .paddingContent {
 	padding-top: 58px;
 }
+
+.contenedorDetallesArchivo {
+	background: #ffffff;
+	color: #000000;
+	position: fixed;
+	bottom: 0;
+	left: 30rem;
+	z-index: 10;
+	height: 300px;
+	width: 70%;
+	border: 2px solid #000000;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 15px; 
+}
+
+.iconoCierre {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 2rem;
+	height: 2rem;
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+
+.tituloDetallesArchivo {
+	height: 4rem; 
+	font-size: 2rem;
+	font-weight: bold;
+	padding: 5px 0;
+}
+.detallesArchivo {
+	height: 2.5rem;
+	font-size: 1.6rem; 
+	padding: 5px 0;
+}
+
 
 /** Example rules used by the template application (remove for your app) */
 /*h1 {
@@ -360,6 +399,7 @@ html>body .gwt-DialogBox {
   height: 12px;
   overflow: hidden;
 }
+
 .cw-DialogBox {
 }
 

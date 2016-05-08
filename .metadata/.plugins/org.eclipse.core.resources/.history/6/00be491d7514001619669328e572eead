@@ -1,0 +1,187 @@
+
+package com.aiss.omnidrive.shared.onedrive.user;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@Generated("org.jsonschema2pojo")
+@JsonPropertyOrder({
+    "total",
+    "used",
+    "remaining",
+    "deleted",
+    "state"
+})
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class OnedriveQuota implements Serializable {
+
+    @JsonProperty("total")
+    private Long total;
+    @JsonProperty("used")
+    private Long used;
+    @JsonProperty("remaining")
+    private Long remaining;
+    @JsonProperty("deleted")
+    private Long deleted;
+    @JsonProperty("state")
+    private String state;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The total
+     */
+    @JsonProperty("total")
+    public Long getTotal() {
+        return total;
+    }
+
+    /**
+     * 
+     * @param total
+     *     The total
+     */
+    @JsonProperty("total")
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
+    /**
+     * 
+     * @return
+     *     The used
+     */
+    @JsonProperty("used")
+    public Long getUsed() {
+        return used;
+    }
+
+    /**
+     * 
+     * @param used
+     *     The used
+     */
+    @JsonProperty("used")
+    public void setUsed(Long used) {
+        this.used = used;
+    }
+
+    /**
+     * 
+     * @return
+     *     The remaining
+     */
+    @JsonProperty("remaining")
+    public Long getRemaining() {
+        return remaining;
+    }
+
+    /**
+     * 
+     * @param remaining
+     *     The remaining
+     */
+    @JsonProperty("remaining")
+    public void setRemaining(Long remaining) {
+        this.remaining = remaining;
+    }
+
+    /**
+     * 
+     * @return
+     *     The deleted
+     */
+    @JsonProperty("deleted")
+    public Long getDeleted() {
+        return deleted;
+    }
+
+    /**
+     * 
+     * @param deleted
+     *     The deleted
+     */
+    @JsonProperty("deleted")
+    public void setDeleted(Long deleted) {
+        this.deleted = deleted;
+    }
+
+    /**
+     * 
+     * @return
+     *     The state
+     */
+    @JsonProperty("state")
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * 
+     * @param state
+     *     The state
+     */
+    @JsonProperty("state")
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void clearAdditionalProperties(){
+    	this.additionalProperties.clear();
+    }
+    
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+    public Double getTotalInGB(){
+    	Double quotaGB;
+    	Double quota;
+    	
+    	quota = new Double(this.getTotal());
+    	quotaGB = (quota / 1024 / 1024 / 1024 ) * 100;
+    	
+    	return Math.round(quotaGB) / 100.0;
+    }
+    
+    public Double getUsageInGB(){
+    	Double usageGB;
+    	Double usage;
+    	
+    	usage = new Double(this.getUsed());
+    	usageGB = (usage / 1024 / 1024 / 1024 ) * 100;
+    	
+    	return Math.round(usageGB) / 100.0;
+    }
+    
+    public Double getPercentUsage(){
+    	Double limit, usage, percent;
+    	
+    	limit = new Double(this.getTotalInGB());
+    	usage = new Double(this.getUsageInGB());
+    	percent = (usage / limit) * 100;
+    	
+    	return Math.round(percent) / 100.0;
+    }
+    
+}

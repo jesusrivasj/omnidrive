@@ -1,0 +1,73 @@
+package com.aiss.omnidrive.server.resources;
+
+import org.restlet.data.ChallengeResponse;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.data.MediaType;
+import org.restlet.data.Method;
+import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.EmptyRepresentation;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
+
+import com.aiss.omnidrive.shared.dropbox.files.DropboxFilesList;
+import com.aiss.omnidrive.shared.dropbox.user.DropboxUserInfo;
+
+public class DropboxResource {
+	
+	private static final String BASE_URL = "https://api.dropboxapi.com/2";
+	private static final String TYPE_TOKEN = "Bearer";
+	
+	public static DropboxUserInfo getUserInfo(String token){
+		DropboxUserInfo userInfo;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		Representation emptyBody;
+		
+		connection = new ClientResource(BASE_URL + "/users/get_current_account");
+		connection.setMethod(Method.POST);
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2", TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+		emptyBody = new EmptyRepresentation();
+		emptyBody.setMediaType(MediaType.ALL);
+		
+		try {
+		userInfo = connection.post(emptyBody, DropboxUserInfo.class);
+		} catch (ResourceException e) {
+			System.out.println(e.getMessage());
+			userInfo = new DropboxUserInfo();
+		}
+		
+		return userInfo;
+	}
+	
+	public static DropboxFilesList getFiles(String token, String parent) {
+		DropboxFilesList files;
+		ClientResource connection;
+		ChallengeResponse authorization;
+		String jsonData;
+		Representation data;
+
+		jsonData = "{\"path\":\"" + parent + "\"}";
+		data = new JsonRepresentation(jsonData);
+		data.setMediaType(MediaType.APPLICATION_JSON);
+		connection = new ClientResource(BASE_URL + "/files/list_folder");
+		connection.setMethod(Method.POST);
+		authorization = new ChallengeResponse(new ChallengeScheme("OAuth2",
+				TYPE_TOKEN));
+		authorization.setRawValue(token);
+		connection.setChallengeResponse(authorization);
+		
+		try {		
+			files = connection.post(data, DropboxFilesList.class);
+		} catch (ResourceException e) {
+			System.out.println(e.getStatus().getCode() + "");
+			System.out.println(e.getStatus().getDescription() + "");
+			System.out.println(e.getStatus().getReasonPhrase() + "");
+			files = new DropboxFilesList();
+		}
+		
+		return files;
+	}
+}

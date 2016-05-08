@@ -12,7 +12,7 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.suite.appengineClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-startupUrl Omnidrive.html -war C:\Users\Jesus\Omnidrive2\omnidrive\Omnidrive\war -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 -port 8888 -server com.google.appengine.tools.development.gwt.AppEngineLauncher com.aiss.omnidrive.Omnidrive"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-startupUrl Omnidrive.html -war C:\Users\Jesus\Omnidrive\omnidrive\Omnidrive\war -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 -port 8888 -server com.google.appengine.tools.development.gwt.AppEngineLauncher com.aiss.omnidrive.Omnidrive"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Omnidrive"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="&quot;-javaagent:C:\Users\Jesus\Herramientas\Eclipse Luna AISS\eclipse\plugins\com.google.appengine.eclipse.sdkbundle_1.9.34\appengine-java-sdk-1.9.34\lib\agent\appengine-agent.jar&quot; -Ddatastore.default_high_rep_job_policy_unapplied_job_pct=50 -Xmx512m"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="&quot;-javaagent:C:\Users\Jesus\Herramientas\Desarrollo\Eclipse Luna AISS\eclipse\plugins\com.google.appengine.eclipse.sdkbundle_1.9.34\appengine-java-sdk-1.9.34\lib\agent\appengine-agent.jar&quot; -Ddatastore.default_high_rep_job_policy_unapplied_job_pct=50 -Xmx512m"/>
 </launchConfiguration>
