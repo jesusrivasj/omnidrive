@@ -9,4 +9,4 @@ Web: http://omni-drive.appspot.com
 
 Desarrollado por:
 
-Jesús Rivas Jimenez <jesus.rivas.jimenez.desarrollo@gmail.com>
+Jesús Rivas Jimenez <jesus.rivas.jmnez@gmail.com>
